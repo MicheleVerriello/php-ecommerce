@@ -1,2 +1,5 @@
 # php-ecommerce
-e-commerce built with laravel and angular
+## Stack
+. PHP & Laravel
+. Typescript & Angular
+. PostgreSQL
