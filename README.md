@@ -1,5 +1,5 @@
 # php-ecommerce
 ## Stack
-. PHP & Laravel
-. Typescript & Angular
-. PostgreSQL
+- PHP & Laravel
+- Typescript & Angular
+- PostgreSQL
