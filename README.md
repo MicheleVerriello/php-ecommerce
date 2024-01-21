@@ -28,6 +28,19 @@
 - `GET /api/items?name=` search for items by name
 - `GET /api/items/{id}` get item details
 
+#### Cart
+- `POST /api/cart/ {idUser}` create the cart
+- `POST /api/cart/{id}/items {idItem, quantity}` add item to cart
+- `PUT /api/cart/items/{idCartItem} {quantity}` update cart item quantity
+- `DELETE /api/cart/items/{idCartItem}` delete cart item
+- `GET /api/cart/{idUser}` get cart
+
+#### Orders
+- `POST /api/orders {idUser, idCart, totalPrice}` place an order
+- `GET /api/orders/{idUser}` get orders by user id
+- `GET /api/orders/{id}` get order details
+- `DELETE /api/orders/{id}` delete order
+
 
 ### UI
 
