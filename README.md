@@ -11,15 +11,58 @@
 
 ## System Design
 
-### Database
+### Database Tables
 
+#### users
+```
+ id (primary key) (integer)
+ name (text)
+ surname (text)
+ email (text)
+ password (text)
+ address (text)
+ phone (text)
+ isAdmin (bool)
+```
+
+#### items
+```
+id (primary key) (integer)
+name (text)
+description (text)
+price (float)
+photo (blob) (idk if it's fast to add this feature)
+```
+
+#### cartitems
+```
+id (primary key) (integer)
+idUser (foreign key) (integer) (del cascade)
+idItem (foreign key) (integer) (del cascade)
+quantity (integer)
+```
+
+#### orders
+```
+id (primary key) (integer)
+idUser (foreign key) (integer) (del cascade)
+totalPrice (float)
+date (timestamp)
+```
+
+#### ordersitems
+```
+id(primary key) (integer)
+idOrder (foreign key) (integer) (del cascade)
+idItem (foreign key) (integer) (del no action)
+```
 
 
 ### Endpoints
 
 #### Authorization
 - `POST /api/authorize/login {email, password, userType}` login.
-- `POST /api/authorize/signup {name, surname, email, password, address, userType}` register a user.
+- `POST /api/authorize/signup {name, surname, email, password, address, phone, isAdmin}` register a user.
 
 #### Items
 - `POST /api/items {name, description, price, photo}` insert item to sell
@@ -29,14 +72,13 @@
 - `GET /api/items/{id}` get item details
 
 #### Cart
-- `POST /api/cart/ {idUser}` create the cart
 - `POST /api/cart/{id}/items {idItem, quantity}` add item to cart
 - `PUT /api/cart/items/{idCartItem} {quantity}` update cart item quantity
 - `DELETE /api/cart/items/{idCartItem}` delete cart item
 - `GET /api/cart/{idUser}` get cart
 
 #### Orders
-- `POST /api/orders {idUser, idCart, totalPrice}` place an order
+- `POST /api/orders {idUser, idCart, totalPrice, status}` place an order
 - `GET /api/orders/{idUser}` get orders by user id
 - `GET /api/orders/{id}` get order details
 - `DELETE /api/orders/{id}` delete order
