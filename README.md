@@ -9,7 +9,8 @@
 2. Download PHP 8.3.1 (if on MacOS use homebrew).
 3. Download Composer (package manger for PHP) `https://getcomposer.org/download/` (place in the project root folder and type the 4 commands, then install globally) `2.6.6`.
 4. Download PostgreSQL 16.
-5. Download TablePlus.
+5. Download TablePlus (optional, useful to see tables and data).
+6. Download PHPStorm (optional, better dev experience, can use university account and see data and tables as well).
 
 ## System Design
 
