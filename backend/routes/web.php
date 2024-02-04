@@ -18,8 +18,8 @@ Route::get('/', function () {
 });
 
 // authorization
-Route::post('/api/login', 'AuthController@login');
-Route::post('/api/signup', 'AuthController@signup');
+Route::post('/api/auth/login', 'AuthController@login');
+Route::post('/api/auth/signup', 'AuthController@signup');
 
 // items
 Route::post('/api/items', 'ItemController@insertItem');
