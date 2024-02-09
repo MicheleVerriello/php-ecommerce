@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +23,11 @@ Route::post('/api/login', 'AuthController@login');
 Route::post('/api/signup', 'AuthController@signup');
 
 // items
-Route::post('/api/items', 'ItemController@insertItem');
-Route::put('/api/items/{id}', 'ItemController@updateItem');
-Route::delete('/api/items/{id}', 'ItemController@deleteItem');
-Route::get('/api/items/{id}', 'ItemController@getItem');
-Route::get('/api/items', 'ItemController@getItems');
+Route::post('/api/items', [ItemController::class, 'insertItem']);
+Route::put('/api/items/{id}', [ItemController::class, 'updateItem']);
+Route::delete('/api/items/{id}', [ItemController::class, 'deleteItem']);
+Route::get('/api/items/{id}',  [ItemController::class, 'getItem']);
+Route::get('/api/items', [ItemController::class, 'getItems']);
 
 // cart
 Route::post('/api/carts/{id}/items', 'CartController@insertItemIntoCart');
