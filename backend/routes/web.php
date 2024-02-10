@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +20,8 @@ Route::get('/', function () {
 });
 
 // authorization
-Route::post('/api/login', 'AuthController@login');
-Route::post('/api/signup', 'AuthController@signup');
+Route::post('/api/auth/login', [AuthController::class, 'login']);
+Route::post('/api/auth/signup', [AuthController::class, 'signup']);
 
 // items
 Route::post('/api/items', [ItemController::class, 'insertItem']);
