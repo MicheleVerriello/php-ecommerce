@@ -9,18 +9,27 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
-        $credentials = $request->only('email', 'password');
 
-        $user = User::getByAttributes([
-            'email' => $credentials[0],
-            'password' => Hash::make($credentials[1])
-        ]);
+        $email = $request->input('email');
+        $password = $request->input('password');
 
-        if($user)
+        $user = User::getUserByEmail($email);
 
-        return response()->json(['error' => 'Invalid credentials'], 401);
+        // checking if user exists
+        if($user != null) {
+            if (Hash::check($password, $user->password)) {
+                unset($user->password);
+                return response()->json(['user' => $user], 200);
+            } else {
+                return response()->json(['error' => 'Invalid credentials.'], 401);
+            }
+        } else {
+            return response()->json(['error' => 'User Not Found'], 404);
+        }
+
+
     }
 
     public function signup(Request $request): JsonResponse
@@ -50,7 +59,7 @@ class AuthController extends Controller
         ]);
 
         if($userID > 0) {
-            $user = User::getByAttributes(['id' => $userID]);
+            $user = User::getById($userID);
             return response()->json(['user' => $user], 201);
         } else {
             return response()->json(['error' => 'Internal Server Error.'], 500);

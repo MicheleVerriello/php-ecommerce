@@ -23,13 +23,19 @@ class User extends Model
         'password'
     ];
 
-    public static function create(array $attributes = [])
+    public static function create(array $attributes = []): int
     {
         return DB::table('users')->insertGetId($attributes);
     }
 
-    public static function getByAttributes(array $attributes = [])
+    public static function getUserByEmail(string $email)
     {
-        return DB::table('users')->get($attributes);
+        $sql = "SELECT * FROM users WHERE email = ?";
+        return DB::selectOne($sql, [$email]);
+    }
+
+    public static function getById(int $id)
+    {
+        return DB::table('users')->where('id', $id)->first();
     }
 }
