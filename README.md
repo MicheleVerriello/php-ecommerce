@@ -12,6 +12,11 @@
 5. Download TablePlus (optional, useful to see tables and data).
 6. Download PHPStorm (optional, better dev experience, can use university account and see data and tables as well).
 
+### Download frontend
+Angular CLI: 17.1.3 <br>
+Node: 20.11.0 <br>
+Package Manager: npm 10.4.0 <br>
+
 ## System Design
 
 ### Database Tables
