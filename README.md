@@ -40,6 +40,13 @@ name (text)
 description (text)
 price (float)
 photo (blob) (idk if it's fast to add this feature)
+idCategory (foreign key) (integer) (default to null)
+```
+
+#### categories
+```
+id (primary key) (integer)
+name (text)
 ```
 
 #### cartitems
