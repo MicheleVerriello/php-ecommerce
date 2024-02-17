@@ -11,6 +11,13 @@ import {AuthorizationService} from "./services/auth/authorization.service";
 import { ProfileComponent } from './components/admin/profile/profile.component';
 import { ItemsComponent } from './components/admin/items/items.component';
 import { HomeComponent } from './components/user/home/home.component';
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+
+// Add icons to the library (you can add more icons as needed)
+library.add(fas, faEye, faEyeSlash);
 
 @NgModule({
   declarations: [
@@ -25,7 +32,8 @@ import { HomeComponent } from './components/user/home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
     AuthorizationService

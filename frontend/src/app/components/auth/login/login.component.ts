@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthorizationService} from "../../../services/auth/authorization.service";
 import {LoginRequest} from "../../../models/auth/auth";
+import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent {
   password: string = '';
   loginRequest: LoginRequest | undefined;
   showError = false; // shows an error if user can't log in
+  hidePassword = true;
 
   constructor(private authorizationService: AuthorizationService) {}
 
@@ -35,8 +37,10 @@ export class LoginComponent {
         }
     },
     error => {
-      console.log("Error: " , error)
       this.showError = true;
     });
   }
+
+  protected readonly faEye = faEye;
+  protected readonly faEyeSlash = faEyeSlash;
 }

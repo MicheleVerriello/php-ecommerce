@@ -1,1 +1,58 @@
-<p>sign-up works!</p>
+<h1 class="text-center mb-4">L'Antica Salumeria</h1>
+
+<form #myForm="ngForm" class="centered-form" (ngSubmit)="signup()">
+  <h3 class="text-center mb-4">Registrazione</h3>
+  <div class="mb-3">
+    <label for="email" class="form-label">Nome</label>
+    <input type="text" class="form-control" name="name" placeholder="Inserisci nome" id="name" [(ngModel)]="user.name" (ngModelChange)="showError = false" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Cognome</label>
+    <input type="text" class="form-control" name="surname" placeholder="Inserisci cognome" id="surname" [(ngModel)]="user.surname" (ngModelChange)="showError = false" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Indirizzo</label>
+    <input type="text" class="form-control" name="address" placeholder="Inserisci indirizzo" id="address" [(ngModel)]="user.address" (ngModelChange)="showError = false" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Telefono</label>
+    <input type="text" class="form-control" name="phone" placeholder="Inserisci numero di telefono" id="phone" [(ngModel)]="user.phone" (ngModelChange)="showError = false" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" placeholder="Inserisci email" id="email" [(ngModel)]="user.email" (ngModelChange)="showError = false" required>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group">
+      <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" name="password" id="password" placeholder="Inserisci password" [(ngModel)]="user.password" (ngModelChange)="this.showPasswordError = !(this.repeatedPassword === this.user.password)" required>
+      <button class="btn btn-outline-secondary" type="button" id="password-toggle" (click)="hidePassword = !hidePassword">
+        <fa-icon [icon]="hidePassword ? faEye : faEyeSlash"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <div class="input-group">
+      <input type="{{ hideRepeatedPassword ? 'password' : 'text' }}" class="form-control" name="repeatPassword" id="repeatPassword" placeholder="Ripeti password" [(ngModel)]="repeatedPassword" (ngModelChange)="this.showPasswordError = !(this.repeatedPassword === this.user.password)" required>
+      <button class="btn btn-outline-secondary" type="button" id="repeated-password-toggle" (click)="hideRepeatedPassword = !hideRepeatedPassword">
+        <fa-icon [icon]="hideRepeatedPassword ? faEye : faEyeSlash"></fa-icon>
+      </button>
+    </div>
+    <p *ngIf="showPasswordError" class="text-danger mt-2">Le due password non combaciano.</p>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="isAdmin" id="isAdmin" [(ngModel)]="user.isAdmin">
+    <label class="form-check-label" for="isAdmin">
+      Sei un amministratore?
+    </label>
+    <p *ngIf="showError" class="text-danger mt-2">Errore durante la registrazione. Riprovare.</p>
+  </div>
+  <br>
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="myForm.invalid">
+    Login
+  </button>
+  <p class="text-dark mt-2">Hai già un profilo? <a routerLink="/auth/login">Accedi</a>.</p>
+</form>

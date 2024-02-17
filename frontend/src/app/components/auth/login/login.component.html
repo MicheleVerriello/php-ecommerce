@@ -1,20 +1,27 @@
 <h1 class="text-center mb-4">L'Antica Salumeria</h1>
 
-<form class="centered-form" (ngSubmit)="login()">
+<form #myForm="ngForm" class="centered-form" (ngSubmit)="login()">
   <h3 class="text-center mb-4">Login</h3>
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
     <input type="email" class="form-control" name="email" placeholder="Inserisci email" id="email" [(ngModel)]="email" (ngModelChange)="showError = false" required>
   </div>
+
   <div class="mb-3">
     <label for="password" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" id="password" placeholder="Inserisci password" [(ngModel)]="password" (ngModelChange)="showError = false" required>
+    <div class="input-group">
+      <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" name="password" id="password" placeholder="Inserisci password" [(ngModel)]="password" (ngModelChange)="showError = false" required>
+      <button class="btn btn-outline-secondary" type="button" id="password-toggle" (click)="hidePassword = !hidePassword">
+        <fa-icon [icon]="hidePassword ? faEye : faEyeSlash"></fa-icon>
+      </button>
+    </div>
     <p *ngIf="showError" class="text-danger mt-2">Username o password non corretti. Riprovare.</p>
   </div>
 
-<button type="submit"
+  <button type="submit"
           class="btn btn-primary"
-          [disabled]="!email || email.length <= 0 || !password || password.length <= 0">
+          [disabled]="myForm.invalid">
     Login
   </button>
+  <p class="text-dark mt-2">Non hai ancora un profilo? <a routerLink="/auth/signup">Registrati</a>.</p>
 </form>
