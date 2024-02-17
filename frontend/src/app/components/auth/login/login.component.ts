@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthorizationService} from "../../../services/auth/authorization.service";
 import {LoginRequest} from "../../../models/auth/auth";
 import {faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   showError = false; // shows an error if user can't log in
   hidePassword = true;
 
-  constructor(private authorizationService: AuthorizationService) {}
+  constructor(private authorizationService: AuthorizationService, private router: Router) {}
 
   login() {
 
@@ -29,12 +30,11 @@ export class LoginComponent {
     }
 
     this.authorizationService.login(this.loginRequest).subscribe(response => {
-        console.log(response)
-        if(response.isAdmin) { // go to admin panel
-
-        } else { // go to user panel
-
-        }
+      if(response.user.isAdmin) { // go to admin panel
+        this.router.navigate(['/user/profile', response.user.id]);
+      } else { // go to user panel
+        this.router.navigate(['/user/home', response.user.id]);
+      }
     },
     error => {
       this.showError = true;

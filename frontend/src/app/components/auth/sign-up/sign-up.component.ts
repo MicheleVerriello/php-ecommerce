@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthorizationService} from "../../../services/auth/authorization.service";
 import {User} from "../../../models/auth/auth";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +18,7 @@ export class SignUpComponent {
   hidePassword = true;
   hideRepeatedPassword = true;
 
-  constructor(private authorizationService: AuthorizationService) {
+  constructor(private authorizationService: AuthorizationService, private router: Router) {
     this.user = {
       id: undefined,
       name: undefined,
@@ -32,16 +33,13 @@ export class SignUpComponent {
 
   signup() {
 
-    console.log(this.user)
-
     this.showError = false;
 
     this.authorizationService.signUp(this.user).subscribe(response => {
-        console.log(response)
-        if (response.isAdmin) { // go to admin panel
-
+        if (response.user.isAdmin) { // go to admin panel
+          this.router.navigate(['/user/profile', response.user.id]);
         } else { // go to user panel
-
+          this.router.navigate(['/user/home', response.user.id]);
         }
       },
       error => {
