@@ -1,14 +1,15 @@
-interface User {
+export interface User {
+  id: number;
   name: string;
   surname: string;
   email: string;
-  password: string;
+  password: string | undefined;
   address: string;
   phone: string;
   isAdmin: boolean;
 }
 
-interface LoginRequest {
+export interface LoginRequest {
   email: string;
   password: string;
 }
