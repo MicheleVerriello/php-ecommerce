@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,10 @@ Route::post('/api/orders', 'OrderController@insertOrder');
 Route::get('/api/orders/{idUser}', 'OrderController@getOrdersByUserId');
 Route::get('/api/orders/{id}', 'OrderController@getOrderDetails');
 Route::delete('/api/orders/{id}', 'OrderController@deleteOrder');
+
+// categories
+Route::post('/api/categories', [CategoryController::class, 'addCategory']);
+Route::delete('/api/categories/{id}', [CategoryController::class, 'deleteCategory']);
 
 
 

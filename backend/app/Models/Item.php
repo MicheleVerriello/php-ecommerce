@@ -11,6 +11,7 @@ class Item extends Model
         'name',
         'description',
         'price',
-        'photo'
+        'photo',
+        'fkIdCategory'
     ];
 }
