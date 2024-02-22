@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,16 +34,17 @@ Route::get('/api/items/{id}',  [ItemController::class, 'getItem']);
 Route::get('/api/items', [ItemController::class, 'getItems']);
 
 // cart
-Route::post('/api/carts/{id}/items', 'CartController@insertItemIntoCart');
-Route::put('/api/carts/items/{idCartItem}', 'CartController@updateCartItemQuantity');
-Route::delete('/api/carts/items/{idCartItem}', 'CartController@deleteCartItem');
-Route::get('/api/carts/{idUser}', 'CartController@insertItem');
+Route::post('/api/carts/{idUser}', [CartController::class, 'createCart']);
+Route::post('/api/carts/items', [CartController::class, 'insertItemIntoCart']);
+Route::put('/api/carts/items/{idCartItem}', [CartController::class, 'updateCartItemQuantity']);
+Route::delete('/api/carts/items/{idCartItem}', [CartController::class, 'deleteCartItem']);
+Route::get('/api/carts/{idUser}', [CartController::class, 'getCart']);
 
 // orders
-Route::post('/api/orders', 'OrderController@insertOrder');
-Route::get('/api/orders/{idUser}', 'OrderController@getOrdersByUserId');
-Route::get('/api/orders/{id}', 'OrderController@getOrderDetails');
-Route::delete('/api/orders/{id}', 'OrderController@deleteOrder');
+Route::post('/api/orders', [OrderController::class, 'insertOrder']);
+Route::get('/api/orders/{idUser}', [OrderController::class, 'getOrdersByUserId']);
+Route::get('/api/orders/{id}', [OrderController::class, 'getOrderDetails']);
+Route::delete('/api/orders/{id}', [OrderController::class, 'deleteOrder']);
 
 // categories
 Route::post('/api/categories', [CategoryController::class, 'addCategory']);

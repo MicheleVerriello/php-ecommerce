@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 
-class ItemController extends Controller
+class CartController extends Controller
 {
-    public function insertItem(Request $request)
+    public function insertItemIntoCart(Request $request)
     {
         $item = new Item();
         $item->name = $request->input('name');
@@ -18,7 +18,7 @@ class ItemController extends Controller
         return response()->json(['message' => 'Item inserted successfully', 'data' => $item], 201);
     }
 
-    public function updateItem(Request $request, $id)
+    public function updateCartItemQuantity(Request $request, $id)
     {
         $item = Item::find($id);
         if (!$item) {
@@ -35,7 +35,7 @@ class ItemController extends Controller
         return response()->json(['message' => 'Item updated successfully', 'data' => $item]);
     }
 
-    public function deleteItem($id)
+    public function deleteCartItem($id)
     {
         $item = Item::find($id);
         if (!$item) {
@@ -47,7 +47,7 @@ class ItemController extends Controller
         return response()->json(['message' => 'Item deleted successfully']);
     }
 
-    public function getItem($id)
+    public function getCart($id)
     {
         $item = Item::find($id);
         if (!$item) {
@@ -57,7 +57,7 @@ class ItemController extends Controller
         return response()->json(['data' => $item]);
     }
 
-    public function getItems()
+    public function createCart($idUser)
     {
         $items = Item::all();
         return response()->json(['data' => $items]);
