@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ItemController extends Controller
 {
-    public function insertItem(Request $request)
+    public function insertItem(Request $request): JsonResponse
     {
-        $item = new Item();
-        $item->name = $request->input('name');
-        $item->description = $request->input('description');
-        $item->price = $request->input('price');
-        $item->photo = $request->input('photo');
-        $item->fkIdCategory = $request->input('fkIdCategory');
-        $item->save();
+        $itemID = Item::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+//            'photo' => $request->input('photo'),
+            'quantity' => $request->input('quantity'),
+            'fkidcategory' => $request->input('fkIdCategory'),
+        ]);
 
-        return response()->json(['message' => 'Item inserted successfully', 'data' => $item], 201);
+        if($itemID > 0) {
+//            $user = User::getById($userID);
+            return response()->json(['item' => $itemID], 201);
+        } else {
+            return response()->json(['error' => 'Internal Server Error.'], 500);
+        }
     }
 
-    public function updateItem(Request $request, $id)
+    public function updateItem(Request $request, $id): JsonResponse
     {
-        $item = Item::find($id);
+        $item = Item::getById($id);
         if (!$item) {
             return response()->json(['message' => 'Item not found'], 404);
         }
@@ -28,38 +38,48 @@ class ItemController extends Controller
         $item->name = $request->input('name');
         $item->description = $request->input('description');
         $item->price = $request->input('price');
-        $item->photo = $request->input('photo');
+        $item->quantity = $request->input('quantity');
+//        $item->photo = $request->input('photo');
         $item->fkIdCategory = $request->input('fkIdCategory');
-        $item->save();
 
-        return response()->json(['message' => 'Item updated successfully', 'data' => $item]);
+        $updatedItem = Item::updateById($id, $item);
+
+        if($updatedItem > 0)
+        {
+            $item = Item::getById();
+            return response()->json(['item' => $item]);
+        }
+
+        return response()->json(['message' => 'Internal server error'], 500);
     }
 
-    public function deleteItem($id)
+    public function deleteItem($id): JsonResponse
     {
-        $item = Item::find($id);
+        $idDeleted = Item::deleteById($id);
+
+        if($idDeleted == 1)
+        {
+            return response()->json(['message' => 'Item deleted successfully']);
+        }
+        else
+        {
+            return response()->json(['message' => 'Internal server error'], 500);
+        }
+    }
+
+    public function getItem($id): JsonResponse
+    {
+        $item = Item::getById($id);
         if (!$item) {
             return response()->json(['message' => 'Item not found'], 404);
         }
 
-        $item->delete();
-
-        return response()->json(['message' => 'Item deleted successfully']);
+        return response()->json(['item' => $item]);
     }
 
-    public function getItem($id)
+    public function getItems(): JsonResponse
     {
-        $item = Item::find($id);
-        if (!$item) {
-            return response()->json(['message' => 'Item not found'], 404);
-        }
-
-        return response()->json(['data' => $item]);
-    }
-
-    public function getItems()
-    {
-        $items = Item::all();
-        return response()->json(['data' => $items]);
+        $items = Item::getAllItems();
+        return response()->json(['items' => $items]);
     }
 }

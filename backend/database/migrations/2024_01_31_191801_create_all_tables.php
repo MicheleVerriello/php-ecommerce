@@ -11,37 +11,46 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+        });
+
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
             $table->float('price');
             $table->binary('photo')->nullable();
+            $table->float('quantity');
+            $table->unsignedBigInteger('fkidcategory');
+            $table->foreign('fkidcategory')->references('id')->on('categories')
+                ->onDelete('cascade');
         });
 
         Schema::create('cartitems', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fkIdUser');
-            $table->foreign('fkIdUser')->references('id')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('fkIdItem');
-            $table->foreign('fkIdItem')->references('id')->on('items')->cascadeOnDelete();
+            $table->unsignedBigInteger('fkiduser');
+            $table->foreign('fkiduser')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('fkiditem');
+            $table->foreign('fkiditem')->references('id')->on('items')->onDelete('cascade');
             $table->unsignedInteger('quantity');
         });
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fkIdUser');
-            $table->foreign('fkIdUser')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('fkiduser');
+            $table->foreign('fkiduser')->references('id')->on('users')->cascadeOnDelete();
             $table->float('totalPrice');
             $table->timestamp('creationDate');
         });
 
         Schema::create('orderitems', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('fkIdOrder');
-            $table->foreign('fkIdOrder')->references('id')->on('orders')->cascadeOnDelete();
-            $table->unsignedBigInteger('fkIdItem');
-            $table->foreign('fkIdItem')->references('id')->on('items')->noActionOnDelete();
+            $table->unsignedBigInteger('fkidorder');
+            $table->foreign('fkidorder')->references('id')->on('orders')->cascadeOnDelete();
+            $table->unsignedBigInteger('fkiditem');
+            $table->foreign('fkiditem')->references('id')->on('items')->noActionOnDelete();
 
         });
     }
@@ -51,9 +60,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
         Schema::dropIfExists('cartitems');
-        Schema::dropIfExists('orders');
         Schema::dropIfExists('orderitems');
+        Schema::dropIfExists('orders');
+        Schema::dropIfExists('items');
+        Schema::dropIfExists('categories');
     }
 };
