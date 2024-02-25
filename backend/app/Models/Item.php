@@ -48,7 +48,20 @@ class Item extends Model
 
     public static function updateById($id, $item)
     {
-        $query = "UPDATE items SET name = $item.name, description = $item.description, price = $item.price, quantity = $item.quantity, fkidcategory = item.fkidcategory WHERE id = $id";
-        return DB::update($query);
+        $query = "UPDATE items SET
+                 name = ?,
+                 description = ?,
+                 price = ?,
+                 quantity = ?,
+                 fkidcategory = ?
+             WHERE id = ?";
+        return DB::update($query, [
+            $item->name,
+            $item->description,
+            $item->price,
+            $item->quantity,
+            $item->fkidcategory,
+            $id
+        ]);
     }
 }

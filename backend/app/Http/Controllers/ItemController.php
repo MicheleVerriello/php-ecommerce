@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class ItemController extends Controller
 {
@@ -40,13 +39,13 @@ class ItemController extends Controller
         $item->price = $request->input('price');
         $item->quantity = $request->input('quantity');
 //        $item->photo = $request->input('photo');
-        $item->fkIdCategory = $request->input('fkIdCategory');
+        $item->fkidcategory = $request->input('fkIdCategory');
 
         $updatedItem = Item::updateById($id, $item);
 
         if($updatedItem > 0)
         {
-            $item = Item::getById();
+            $item = Item::getById($id);
             return response()->json(['item' => $item]);
         }
 
