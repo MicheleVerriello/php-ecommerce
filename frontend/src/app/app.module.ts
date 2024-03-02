@@ -15,6 +15,8 @@ import {fas} from '@fortawesome/free-solid-svg-icons';
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {ItemService} from "./services/items/item.service";
+import {CategoryService} from "./services/categories/category.service";
 
 // Add icons to the library (you can add more icons as needed)
 library.add(fas, faEye, faEyeSlash);
@@ -36,7 +38,9 @@ library.add(fas, faEye, faEyeSlash);
     FontAwesomeModule
   ],
   providers: [
-    AuthorizationService
+    AuthorizationService,
+    ItemService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
