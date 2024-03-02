@@ -23,6 +23,12 @@ class Category extends Model
         return DB::select($sql);
     }
 
+    public static function searchCategories($searchValue)
+    {
+        $sql = "SELECT * FROM categories WHERE name ILIKE '%$searchValue%'";
+        return DB::select($sql);
+    }
+
     public static function getById(int $id)
     {
         return DB::table('categories')->where('id', $id)->first();
@@ -39,12 +45,7 @@ class Category extends Model
 
     public static function deleteById(int $id)
     {
-        $object = self::findOrFail($id);
-        return $object->delete();
-    }
-
-    public function delete()
-    {
-        return parent::delete();
+        $query = "DELETE FROM categories WHERE id = $id";
+        return DB::delete($query);
     }
 }

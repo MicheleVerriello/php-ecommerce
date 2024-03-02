@@ -32,14 +32,18 @@ class CategoryController extends Controller
             return response()->json(['error' => 'Bad request'], 400);
         }
     }
-//
-//    public function updateCategory(Request $request): JsonResponse
-//    {
-//
-//    }
-//
-//    public function searchCategory(Request $request): JsonResponse
-//    {
-//
-//    }
+
+    public function searchCategory(Request $request): JsonResponse
+    {
+        $searchValue = $request->query('searchValue');
+
+        if($searchValue != null) {
+            $categories = Category::searchCategories($searchValue);
+            return response()->json(['categories' => $categories]);
+        } else {
+            $categories = Category::getAllCategories();
+            return response()->json(['categories' => $categories]);
+        }
+
+    }
 }
