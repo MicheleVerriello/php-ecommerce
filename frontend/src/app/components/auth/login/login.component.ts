@@ -31,7 +31,7 @@ export class LoginComponent {
 
     this.authorizationService.login(this.loginRequest).subscribe(response => {
       if(response.user.isAdmin) { // go to admin panel
-        this.router.navigate(['/user/profile', response.user.id]);
+        this.router.navigate(['/admin/items', response.user.id]);
       } else { // go to user panel
         this.router.navigate(['/user/home', response.user.id]);
       }
