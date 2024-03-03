@@ -16,9 +16,21 @@ class CategoryController extends Controller
         $category = Category::createCategory(['name' => $name]);
 
         if($category != null) {
-            return response()->json(['category' => $category], 200);
+            $response = Category::getById($category);
+            return response()->json(['category' => $response], 201);
         } else {
             return response()->json(['error' => 'Bad request'], 400);
+        }
+    }
+
+    public function getCategoryById($id): JsonResponse
+    {
+        $category = Category::getById($id);
+
+        if($category != null) {
+            return response()->json(['category' => $category], 200);
+        } else {
+            return response()->json(['error' => 'Internal Server Error'], 500);
         }
     }
 

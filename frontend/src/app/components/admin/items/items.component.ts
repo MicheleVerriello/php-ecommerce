@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import {ItemService} from "../../../services/items/item.service";
+import {CategoryService} from "../../../services/categories/category.service";
+import {Item} from "../../../models/auth/item";
 
 @Component({
   selector: 'app-items',
@@ -7,4 +10,24 @@ import { Component } from '@angular/core';
 })
 export class ItemsComponent {
 
+  items: Item[] = []; //initializing empty products array
+
+  constructor(private itemService: ItemService, private categoryService: CategoryService) {}
+
+  ngOnInit(): void {
+    console.log('ngOnInit');
+    this.getAllItems();
+
+  }
+
+  getAllItems(): void {
+    this.itemService.getAllItems().subscribe(response => {
+        this.items = response.items;
+        for (let item of this.items) {
+          this.categoryService.getCategoryById(item.fkidcategory).subscribe(categoryResponse => {
+            item.category = categoryResponse.category.name;
+          })
+        }
+    });
+  }
 }

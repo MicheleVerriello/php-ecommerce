@@ -5,5 +5,9 @@ export interface ItemResponse {
 }
 
 export interface ItemsResponse {
-  item: Item[];
+  items: Item[];
+}
+
+export interface InsertResponse {
+  item: number;
 }

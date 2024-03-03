@@ -29,7 +29,7 @@ export class CategoryService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  getItemById(id: number): Observable<ItemResponse> {
-    return this.http.get<ItemResponse>(`${this.apiUrl}/${id}`);
+  getCategoryById(id: number): Observable<CategoryResponse> {
+    return this.http.get<CategoryResponse>(`${this.apiUrl}/${id}`);
   }
 }

@@ -4,5 +4,6 @@ export interface Item {
   description: string;
   quantity: number;
   price: number;
-  fkIdCategory: number;
+  fkidcategory: number;
+  category: string;
 }

@@ -7,6 +7,7 @@ import {ProfileComponent} from "./components/user/profile/profile.component";
 import {ItemsComponent} from "./components/admin/items/items.component";
 
 const routes: Routes = [
+  {path: '', component: LoginComponent},
   {path: 'auth/login', component: LoginComponent},
   {path: 'auth/signup', component: SignUpComponent},
   {path: 'user/home/:id', component: HomeComponent},

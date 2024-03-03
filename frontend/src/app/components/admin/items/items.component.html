@@ -1,1 +1,10 @@
-<p>items works!</p>
+<div *ngFor="let item of items" class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ item.name }}</h5> | <button type="button" class="btn btn-outline-secondary">{{ item.category }}</button>
+
+    <p class="card-text">{{ item.description }}</p>
+    <button type="button" class="btn btn-warning">Modifica</button>
+    <button type="button" class="btn btn-danger">Elimina</button>
+  </div>
+</div>

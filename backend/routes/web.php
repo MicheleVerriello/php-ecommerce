@@ -48,6 +48,7 @@ Route::delete('/api/orders/{id}', [OrderController::class, 'deleteOrder']);
 
 // categories
 Route::post('/api/categories', [CategoryController::class, 'addCategory']);
+Route::get('/api/categories/{id}', [CategoryController::class, 'getCategoryById']);
 Route::delete('/api/categories/{id}', [CategoryController::class, 'deleteCategory']);
 Route::get('/api/categories', [CategoryController::class, 'searchCategory']);
 

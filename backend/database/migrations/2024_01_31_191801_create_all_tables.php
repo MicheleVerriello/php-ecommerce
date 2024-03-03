@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->float('price');
-            $table->binary('photo')->nullable();
+            $table->longText('photo')->nullable();
             $table->float('quantity');
             $table->unsignedBigInteger('fkidcategory');
             $table->foreign('fkidcategory')->references('id')->on('categories')

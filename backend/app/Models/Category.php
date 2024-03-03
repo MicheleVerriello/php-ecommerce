@@ -34,15 +34,6 @@ class Category extends Model
         return DB::table('categories')->where('id', $id)->first();
     }
 
-    public static function getByName(string $name)
-    {
-        $categories = DB::table('categories')
-            ->where('name', 'ilike', '%'.$name.'%')
-            ->get();
-
-        return $categories;
-    }
-
     public static function deleteById(int $id)
     {
         $query = "DELETE FROM categories WHERE id = $id";

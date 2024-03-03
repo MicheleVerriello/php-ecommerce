@@ -20,8 +20,8 @@ class ItemController extends Controller
         ]);
 
         if($itemID > 0) {
-//            $user = User::getById($userID);
-            return response()->json(['item' => $itemID], 201);
+            $item = Item::getById($itemID);
+            return response()->json(['item' => $item]);
         } else {
             return response()->json(['error' => 'Internal Server Error.'], 500);
         }

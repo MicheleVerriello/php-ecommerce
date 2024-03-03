@@ -37,7 +37,7 @@ export class SignUpComponent {
 
     this.authorizationService.signUp(this.user).subscribe(response => {
         if (response.user.isAdmin) { // go to admin panel
-          this.router.navigate(['/user/profile', response.user.id]);
+          this.router.navigate(['/admin/items']);
         } else { // go to user panel
           this.router.navigate(['/user/home', response.user.id]);
         }
