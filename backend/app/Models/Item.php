@@ -64,4 +64,10 @@ class Item extends Model
             $id
         ]);
     }
+
+    public static function searchItems($searchValue)
+    {
+        $sql = "SELECT * FROM items WHERE name ILIKE '%$searchValue%'";
+        return DB::select($sql);
+    }
 }

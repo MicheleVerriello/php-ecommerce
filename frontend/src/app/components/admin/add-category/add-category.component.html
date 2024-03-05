@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+
+<div class="container" style="margin-top: 1%">
+  <div class="row">
+    <!-- First column for insert -->
+    <div class="col-md-6">
+      <form #myForm="ngForm" class="centered-form" style="margin: 3%" (ngSubmit)="addCategory()">
+        <h3 class="text-center mb-4">Aggiungi Categoria</h3>
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" class="form-control" name="name" placeholder="Inserisci nome della categoria" id="name" [(ngModel)]="category.name" (ngModelChange)="clearError()" required>
+        </div>
+        <p *ngIf="showError" class="text-danger mt-2">La categoria inserita già esiste.</p>
+
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="myForm.invalid">
+          Aggiungi Categoria
+        </button>
+        <p *ngIf="showSuccess" class="text-success mt-2">La categoria è stata inserita con successo.</p>
+      </form>
+    </div>
+    <!-- Second column for delete -->
+    <div class="col-md-6">
+      <form #myFormDelete="ngForm" class="centered-form" style="margin: 3%" (ngSubmit)="deleteCategory()">
+        <h3 class="text-center mb-4">Elimina Categoria</h3>
+        <div class="mb-3">
+          <label for="categories" class="form-label">Seleziona la categoria da eliminare</label>
+          <select class="form-select"
+                  aria-label="categories"
+                  id="categories"
+                  [(ngModel)]="selectedCategoryId"
+                  name="categoryId"
+                  (ngModelChange)="showSuccessDeletedCategory = false;"
+                  required
+          >
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+        </div>
+        <button type="submit"
+                class="btn btn-danger"
+                [disabled]="myFormDelete.invalid">
+          Elimina Categoria
+        </button>
+        <p *ngIf="showSuccessDeletedCategory" class="text-success mt-2">La categoria è stata eliminata con successo.</p>
+      </form>
+    </div>
+  </div>
+</div>

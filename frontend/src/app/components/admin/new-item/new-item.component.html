@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+
+<form #myForm="ngForm" class="centered-form" style="margin: 3%" (ngSubmit)="addItem()">
+  <h3 class="text-center mb-4">Aggiungi Prodotto</h3>
+  <div class="mb-3">
+    <label for="name-val" class="form-label">Nome</label>
+    <input type="text" class="form-control" name="name-val" placeholder="Inserisci nome del prodotto" id="name-val" [(ngModel)]="item.name" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Descrizione</label>
+    <textarea class="form-control" name="description" placeholder="Inserisci descrizione" id="description" [(ngModel)]="item.description" required></textarea>
+  </div>
+  <div class="mb-3 row align-items-lg-center">
+    <div class="col-md-4">
+      <label for="quantity" class="form-label">Quantità</label>
+      <input type="number"  min="0" class="form-control" name="quantity" placeholder="Inserisci quantità" id="quantity" [(ngModel)]="item.quantity" required>
+    </div>
+    <div class="col-md-4">
+      <label for="price" class="form-label">Prezzo ($)</label>
+      <input type="number"  min="0" class="form-control" name="price" placeholder="Inserisci prezzo" id="price" [(ngModel)]="item.quantity" required>
+    </div>
+    <div class="col-md-4">
+      <input class="form-check-input" type="checkbox" id="isOffer" [(ngModel)]="item.isOffer">
+      <label class="form-check-label" for="isOffer">
+        &nbsp;&nbsp;Offerta
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3 col-6">
+    <label for="categories" class="form-label">Categoria</label>
+    <select class="form-select"
+            aria-label="categories"
+            id="categories"
+            [(ngModel)]="item.fkidcategory"
+            name="categoryId"
+            required
+    >
+      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Inserisci immagine</label>
+    <input class="form-control" type="file" id="formFile">
+  </div>
+
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="myForm.invalid">
+    Aggiungi Prodotto
+  </button>
+</form>

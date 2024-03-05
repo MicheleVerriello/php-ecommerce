@@ -6,4 +6,5 @@ export interface Item {
   price: number;
   fkidcategory: number;
   category: string;
+  isOffer: boolean;
 }

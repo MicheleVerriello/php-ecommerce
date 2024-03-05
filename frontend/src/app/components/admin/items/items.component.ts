@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {ItemService} from "../../../services/items/item.service";
 import {CategoryService} from "../../../services/categories/category.service";
-import {Item} from "../../../models/auth/item";
+import {Item} from "../../../models/item";
 
 @Component({
   selector: 'app-items',
@@ -11,6 +11,7 @@ import {Item} from "../../../models/auth/item";
 export class ItemsComponent {
 
   items: Item[] = []; //initializing empty products array
+  searchValue: string = ''; // empty search value
 
   constructor(private itemService: ItemService, private categoryService: CategoryService) {}
 
@@ -28,6 +29,17 @@ export class ItemsComponent {
             item.category = categoryResponse.category.name;
           })
         }
+    });
+  }
+
+  searchItems(): void {
+    this.itemService.searchItems(this.searchValue).subscribe(response => {
+      this.items = response.items;
+      for (let item of this.items) {
+        this.categoryService.getCategoryById(item.fkidcategory).subscribe(categoryResponse => {
+          item.category = categoryResponse.category.name;
+        })
+      }
     });
   }
 }

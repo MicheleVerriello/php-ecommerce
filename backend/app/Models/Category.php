@@ -17,13 +17,13 @@ class Category extends Model
         return DB::table('categories')->insertGetId($attributes);
     }
 
-    public static function getAllCategories()
+    public static function getAllCategories(): array
     {
         $sql = "SELECT * FROM categories";
         return DB::select($sql);
     }
 
-    public static function searchCategories($searchValue)
+    public static function searchCategories($searchValue): array
     {
         $sql = "SELECT * FROM categories WHERE name ILIKE '%$searchValue%'";
         return DB::select($sql);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ItemResponse} from "../../models/responses/item-response";
-import {Category} from "../../models/auth/category";
+import {Category} from "../../models/category";
 import {CategoryPagedResponse, CategoryResponse} from "../../models/responses/category-response";
 
 @Injectable({

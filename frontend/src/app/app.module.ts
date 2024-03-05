@@ -17,6 +17,10 @@ import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {ItemService} from "./services/items/item.service";
 import {CategoryService} from "./services/categories/category.service";
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NewItemComponent } from './components/admin/new-item/new-item.component';
+import { EditItemComponent } from './components/admin/edit-item/edit-item.component';
+import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 
 // Add icons to the library (you can add more icons as needed)
 library.add(fas, faEye, faEyeSlash);
@@ -28,7 +32,11 @@ library.add(fas, faEye, faEyeSlash);
     SignUpComponent,
     ProfileComponent,
     ItemsComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    NewItemComponent,
+    EditItemComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

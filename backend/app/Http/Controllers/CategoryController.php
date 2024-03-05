@@ -13,6 +13,11 @@ class CategoryController extends Controller
 
         $name = $request->input('name');
 
+        $categories = Category::searchCategories($name);
+        if(count($categories) > 0) {
+            return response()->json(['error' => 'Bad request'], 400);
+        }
+
         $category = Category::createCategory(['name' => $name]);
 
         if($category != null) {
@@ -51,11 +56,10 @@ class CategoryController extends Controller
 
         if($searchValue != null) {
             $categories = Category::searchCategories($searchValue);
-            return response()->json(['categories' => $categories]);
         } else {
             $categories = Category::getAllCategories();
-            return response()->json(['categories' => $categories]);
         }
 
+        return response()->json(['categories' => $categories]);
     }
 }

@@ -76,9 +76,16 @@ class ItemController extends Controller
         return response()->json(['item' => $item]);
     }
 
-    public function getItems(): JsonResponse
+    public function getItems(Request $request): JsonResponse
     {
-        $items = Item::getAllItems();
+
+        $searchValue = $request->query('searchValue');
+
+        if($searchValue != null) {
+            $items = Item::searchItems($searchValue);
+        } else {
+            $items = Item::getAllItems();
+        }
         return response()->json(['items' => $items]);
     }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthorizationService} from "../../../services/auth/authorization.service";
-import {User} from "../../../models/auth/auth";
+import {User} from "../../../models/auth";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {Router} from "@angular/router";
 

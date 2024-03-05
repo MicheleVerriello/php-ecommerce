@@ -1,4 +1,4 @@
-import {Category} from "../auth/category";
+import {Category} from "../category";
 
 export interface CategoryResponse {
   category: Category;

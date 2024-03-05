@@ -1,4 +1,4 @@
-import {Item} from "../auth/item";
+import {Item} from "../item";
 
 export interface ItemResponse {
   item: Item;
@@ -6,8 +6,4 @@ export interface ItemResponse {
 
 export interface ItemsResponse {
   items: Item[];
-}
-
-export interface InsertResponse {
-  item: number;
 }

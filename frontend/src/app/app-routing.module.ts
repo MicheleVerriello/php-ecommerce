@@ -5,6 +5,9 @@ import {SignUpComponent} from "./components/auth/sign-up/sign-up.component";
 import {HomeComponent} from "./components/user/home/home.component";
 import {ProfileComponent} from "./components/user/profile/profile.component";
 import {ItemsComponent} from "./components/admin/items/items.component";
+import {NewItemComponent} from "./components/admin/new-item/new-item.component";
+import {EditItemComponent} from "./components/admin/edit-item/edit-item.component";
+import {AddCategoryComponent} from "./components/admin/add-category/add-category.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -12,7 +15,10 @@ const routes: Routes = [
   {path: 'auth/signup', component: SignUpComponent},
   {path: 'user/home/:id', component: HomeComponent},
   {path: 'user/profile/:id', component: ProfileComponent},
-  {path: 'admin/items', component: ItemsComponent}
+  {path: 'admin/items', component: ItemsComponent},
+  {path: 'admin/items/new', component: NewItemComponent},
+  {path: 'admin/items/edit/:id', component: EditItemComponent},
+  {path: 'admin/categories/new', component: AddCategoryComponent}
 ];
 
 @NgModule({
