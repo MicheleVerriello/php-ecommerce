@@ -10,13 +10,34 @@ class ItemController extends Controller
 {
     public function insertItem(Request $request): JsonResponse
     {
+
+        // Validate the incoming request
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'quantity' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'isoffer' => 'required|boolean',
+            'fkidcategory' => 'required|numeric',
+        ]);
+
+        // Store the image file
+        $photo = $request->file('photo');
+        $imageName = '';
+        if($photo)
+        {
+            $imageName = time().'.'.$photo->extension();
+            $photo->move(public_path('images'), $imageName);
+        }
+
         $itemID = Item::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'price' => $request->input('price'),
-//            'photo' => $request->input('photo'),
+            'photo' => $imageName,
             'quantity' => $request->input('quantity'),
-            'fkidcategory' => $request->input('fkIdCategory'),
+            'isoffer' => $request->input('isoffer'),
+            'fkidcategory' => $request->input('fkidcategory'),
         ]);
 
         if($itemID > 0) {
@@ -34,11 +55,17 @@ class ItemController extends Controller
             return response()->json(['message' => 'Item not found'], 404);
         }
 
+        //update image
+        $photo = $request->file('photo');
+        $imageName = time().'.'.$photo->extension(); //create image name
+        $photo->move(public_path('images'), $imageName); //copying the image into the images folder
+
         $item->name = $request->input('name');
         $item->description = $request->input('description');
         $item->price = $request->input('price');
         $item->quantity = $request->input('quantity');
-//        $item->photo = $request->input('photo');
+        $item->isoffer = $request->input('isoffer');
+        $item->photo = $imageName;
         $item->fkidcategory = $request->input('fkIdCategory');
 
         $updatedItem = Item::updateById($id, $item);

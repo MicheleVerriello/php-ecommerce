@@ -14,7 +14,8 @@ class Item extends Model
         'price',
         'photo',
         'quantity',
-        'fkidcategory'
+        'fkidcategory',
+        'isoffer'
     ];
 
     public static function create(array $attributes = []): int

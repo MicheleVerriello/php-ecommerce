@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('price');
             $table->longText('photo')->nullable();
             $table->float('quantity');
+            $table->boolean('isoffer');
             $table->unsignedBigInteger('fkidcategory');
             $table->foreign('fkidcategory')->references('id')->on('categories')
                 ->onDelete('cascade');

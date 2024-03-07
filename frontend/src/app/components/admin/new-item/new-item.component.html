@@ -4,24 +4,41 @@
   <h3 class="text-center mb-4">Aggiungi Prodotto</h3>
   <div class="mb-3">
     <label for="name-val" class="form-label">Nome</label>
-    <input type="text" class="form-control" name="name-val" placeholder="Inserisci nome del prodotto" id="name-val" [(ngModel)]="item.name" required>
+    <input type="text" class="form-control" name="name-val" id="name-val"
+           placeholder="Inserisci nome del prodotto"
+           [(ngModel)]="item.name"
+           (ngModelChange)="showSuccess = false"
+           required>
   </div>
 
   <div class="mb-3">
     <label for="description" class="form-label">Descrizione</label>
-    <textarea class="form-control" name="description" placeholder="Inserisci descrizione" id="description" [(ngModel)]="item.description" required></textarea>
+    <textarea class="form-control" name="description" id="description"
+              placeholder="Inserisci descrizione"
+              [(ngModel)]="item.description"
+              (ngModelChange)="showSuccess = false"
+              required>
+    </textarea>
   </div>
   <div class="mb-3 row align-items-lg-center">
     <div class="col-md-4">
       <label for="quantity" class="form-label">Quantità</label>
-      <input type="number"  min="0" class="form-control" name="quantity" placeholder="Inserisci quantità" id="quantity" [(ngModel)]="item.quantity" required>
+      <input type="number"  min="0" class="form-control" name="quantity" placeholder="Inserisci quantità" id="quantity"
+             [(ngModel)]="item.quantity"
+             (ngModelChange)="showSuccess = false"
+             required>
     </div>
     <div class="col-md-4">
       <label for="price" class="form-label">Prezzo ($)</label>
-      <input type="number"  min="0" class="form-control" name="price" placeholder="Inserisci prezzo" id="price" [(ngModel)]="item.quantity" required>
+      <input type="number"  min="0" class="form-control" name="price" placeholder="Inserisci prezzo" id="price"
+             [(ngModel)]="item.price"
+             (ngModelChange)="showSuccess = false"
+             required>
     </div>
     <div class="col-md-4">
-      <input class="form-check-input" type="checkbox" id="isOffer" [(ngModel)]="item.isOffer">
+      <input class="form-check-input" type="checkbox" id="isOffer" name="isOffer"
+             [(ngModel)]="item.isoffer"
+             (ngModelChange)="showSuccess = false">
       <label class="form-check-label" for="isOffer">
         &nbsp;&nbsp;Offerta
       </label>
@@ -34,6 +51,7 @@
             aria-label="categories"
             id="categories"
             [(ngModel)]="item.fkidcategory"
+            (ngModelChange)="showSuccess = false"
             name="categoryId"
             required
     >
@@ -43,7 +61,7 @@
 
   <div class="mb-3">
     <label for="formFile" class="form-label">Inserisci immagine</label>
-    <input class="form-control" type="file" id="formFile">
+    <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)">
   </div>
 
   <button type="submit"
@@ -51,4 +69,5 @@
           [disabled]="myForm.invalid">
     Aggiungi Prodotto
   </button>
+  <p *ngIf="showSuccess" class="text-success mt-2">Prodotto inserito con successo.</p>
 </form>

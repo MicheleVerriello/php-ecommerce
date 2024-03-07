@@ -6,4 +6,12 @@ import {Route, Router} from "@angular/router";
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+
+  constructor(private router: Router) {}
+
+  logout() {
+    window.localStorage.clear();
+    this.router.navigate(['/auth/login']);
+  }
+}

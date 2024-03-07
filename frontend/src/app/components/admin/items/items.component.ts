@@ -12,6 +12,7 @@ export class ItemsComponent {
 
   items: Item[] = []; //initializing empty products array
   searchValue: string = ''; // empty search value
+  comingSoonImage: string = 'comingsoonimage.jpeg';
 
   constructor(private itemService: ItemService, private categoryService: CategoryService) {}
 
@@ -41,5 +42,11 @@ export class ItemsComponent {
         })
       }
     });
+  }
+
+  deleteItem(id: number) {
+    this.itemService.deleteItem(id).subscribe(response => {
+      this.getAllItems(); //refresh items once one is deleted
+    })
   }
 }

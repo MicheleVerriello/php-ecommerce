@@ -17,7 +17,7 @@ export class ItemService {
     return this.http.get<ItemsResponse>(this.apiUrl);
   }
 
-  insertItem(item: Item): Observable<ItemResponse> {
+  insertItem(item: FormData): Observable<ItemResponse> {
     return this.http.post<ItemResponse>(this.apiUrl, item);
   }
 

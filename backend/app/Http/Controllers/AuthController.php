@@ -40,8 +40,42 @@ class AuthController extends Controller
                 'surname' => 'required|string',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:6',
-                'address' => 'required|string',
-                'phone' => 'required|string',
+                'address' => 'string',
+                'phone' => 'string',
+                'isAdmin' => 'required|boolean',
+            ]);
+        } catch (ValidationException $exception) {
+            return response()->json(['error' => 'The sent values are not valid. ' . $exception->getMessage()], 400);
+        }
+
+        $userID = User::create([
+            'name' => $request->input('name'),
+            'surname' => $request->input('surname'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'isAdmin' => $request->input('isAdmin'),
+        ]);
+
+        if($userID > 0) {
+            $user = User::getById($userID);
+            return response()->json(['user' => $user], 201);
+        } else {
+            return response()->json(['error' => 'Internal Server Error.'], 500);
+        }
+    }
+
+    public function update($id, Request $request): JsonResponse
+    {
+        try {
+            $this->validate($request, [
+                'name' => 'required|string',
+                'surname' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+                'address' => 'string',
+                'phone' => 'string',
                 'isAdmin' => 'required|boolean',
             ]);
         } catch (ValidationException $exception) {

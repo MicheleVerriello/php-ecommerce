@@ -36,6 +36,7 @@ export class SignUpComponent {
     this.showError = false;
 
     this.authorizationService.signUp(this.user).subscribe(response => {
+        window.localStorage.setItem('id', response.user.id ? response.user.id.toString() : '0');
         if (response.user.isAdmin) { // go to admin panel
           this.router.navigate(['/admin/items']);
         } else { // go to user panel

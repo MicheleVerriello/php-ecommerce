@@ -21,6 +21,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewItemComponent } from './components/admin/new-item/new-item.component';
 import { EditItemComponent } from './components/admin/edit-item/edit-item.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
+import { ItemDetailsComponent } from './components/admin/item-details/item-details.component';
 
 // Add icons to the library (you can add more icons as needed)
 library.add(fas, faEye, faEyeSlash);
@@ -36,7 +37,8 @@ library.add(fas, faEye, faEyeSlash);
     NavbarComponent,
     NewItemComponent,
     EditItemComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    ItemDetailsComponent
   ],
   imports: [
     BrowserModule,
