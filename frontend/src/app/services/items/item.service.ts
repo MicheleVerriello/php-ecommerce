@@ -29,7 +29,7 @@ export class ItemService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  getItemById(id: number): Observable<ItemResponse> {
+  getItemById(id: number | string): Observable<ItemResponse> {
     return this.http.get<ItemResponse>(`${this.apiUrl}/${id}`);
   }
 

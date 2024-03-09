@@ -19,7 +19,6 @@ import {ItemService} from "./services/items/item.service";
 import {CategoryService} from "./services/categories/category.service";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewItemComponent } from './components/admin/new-item/new-item.component';
-import { EditItemComponent } from './components/admin/edit-item/edit-item.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { ItemDetailsComponent } from './components/admin/item-details/item-details.component';
 
@@ -36,7 +35,6 @@ library.add(fas, faEye, faEyeSlash);
     HomeComponent,
     NavbarComponent,
     NewItemComponent,
-    EditItemComponent,
     AddCategoryComponent,
     ItemDetailsComponent
   ],

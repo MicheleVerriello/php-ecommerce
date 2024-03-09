@@ -1,1 +1,89 @@
-<p>item-details works!</p>
+<app-navbar></app-navbar>
+
+<form #myForm="ngForm" class="centered-form" style="margin: 3%" (ngSubmit)="updateItem()">
+  <h3 class="text-center mb-4">Dettagli Prodotto
+    <button class="btn btn-outline-warning" (click)="isFormEnabled = true;" *ngIf="!isFormEnabled">Modifica</button>
+    <button class="btn btn-outline-danger" (click)="isFormEnabled = false;" *ngIf="isFormEnabled">Annulla</button>
+  </h3>
+  <div class="row align-items-center">
+    <div class="col-4">
+<!--      empty col to put the image into center   -->
+    </div>
+    <div class="col-4">
+      <img src="http://localhost:8000/images/{{item.photo ? item.photo : this.comingSoonImage}}" class="card-img-top" style="width: 100%; height: 250px">
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="name-val" class="form-label">Nome</label>
+    <input type="text" class="form-control" name="name-val" id="name-val"
+           placeholder="Inserisci nome del prodotto"
+           [(ngModel)]="item.name"
+           (ngModelChange)="showSuccess = false"
+           [disabled]="!isFormEnabled"
+           required>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Descrizione</label>
+    <textarea class="form-control" name="description" id="description"
+              placeholder="Inserisci descrizione"
+              [(ngModel)]="item.description"
+              (ngModelChange)="showSuccess = false"
+              [disabled]="!isFormEnabled"
+              required>
+    </textarea>
+  </div>
+  <div class="mb-3 row align-items-lg-center">
+    <div class="col-md-4">
+      <label for="quantity" class="form-label">Quantità</label>
+      <input type="number"  min="0" class="form-control" name="quantity" placeholder="Inserisci quantità" id="quantity"
+             [(ngModel)]="item.quantity"
+             (ngModelChange)="showSuccess = false"
+             [disabled]="!isFormEnabled"
+             required>
+    </div>
+    <div class="col-md-4">
+      <label for="price" class="form-label">Prezzo ($)</label>
+      <input type="number"  min="0" class="form-control" name="price" placeholder="Inserisci prezzo" id="price"
+             [(ngModel)]="item.price"
+             (ngModelChange)="showSuccess = false"
+             [disabled]="!isFormEnabled"
+             required>
+    </div>
+    <div class="col-md-4">
+      <input class="form-check-input" type="checkbox" id="isOffer" name="isOffer"
+             [(ngModel)]="item.isoffer"
+             (ngModelChange)="showSuccess = false"
+             [disabled]="!isFormEnabled">
+      <label class="form-check-label" for="isOffer">
+        &nbsp;&nbsp;Offerta
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3 col-6">
+    <label for="categories" class="form-label">Categoria</label>
+    <select class="form-select"
+            aria-label="categories"
+            id="categories"
+            [(ngModel)]="item.fkidcategory"
+            (ngModelChange)="showSuccess = false"
+            [disabled]="!isFormEnabled"
+            name="categoryId"
+            required>
+<!--      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>-->
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Immagine</label>
+    <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" [disabled]="!isFormEnabled">
+  </div>
+
+  <button type="submit"
+          class="btn btn-primary"
+          [disabled]="myForm.invalid && !isFormEnabled">
+    Aggiungi Prodotto
+  </button>
+  <p *ngIf="showSuccess" class="text-success mt-2">Prodotto inserito con successo.</p>
+</form>
