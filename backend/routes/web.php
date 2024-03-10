@@ -25,11 +25,15 @@ Route::get('/', function () {
 // authorization
 Route::post('/api/auth/login', [AuthController::class, 'login']);
 Route::post('/api/auth/signup', [AuthController::class, 'signup']);
+Route::get('/api/auth/{id}', [AuthController::class, 'getUser']);
+Route::put('/api/auth/{id}', [AuthController::class, 'updateUser']);
 
 // items
 Route::post('/api/items', [ItemController::class, 'insertItem']);
 Route::put('/api/items/{id}', [ItemController::class, 'updateItem']);
 Route::delete('/api/items/{id}', [ItemController::class, 'deleteItem']);
+Route::put('/api/items/{id}/photo', [ItemController::class, 'deleteItemPhoto']);
+Route::post('/api/items/{id}/photo', [ItemController::class, 'updateItemPhoto']);
 Route::get('/api/items/{id}',  [ItemController::class, 'getItem']);
 Route::get('/api/items', [ItemController::class, 'getItems']);
 

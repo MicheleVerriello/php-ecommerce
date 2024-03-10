@@ -21,12 +21,20 @@ export class ItemService {
     return this.http.post<ItemResponse>(this.apiUrl, item);
   }
 
+  updateItemPhoto(id:number, item: FormData): Observable<ItemResponse> {
+    return this.http.post<ItemResponse>(`${this.apiUrl}/${id}/photo`, item);
+  }
+
   updateItem(id: number, item: Item): Observable<ItemResponse> {
     return this.http.put<ItemResponse>(`${this.apiUrl}/${id}`, item);
   }
 
   deleteItem(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  deleteItemPhoto(id: number): Observable<ItemResponse> {
+    return this.http.put<ItemResponse>(`${this.apiUrl}/${id}/photo`, null);
   }
 
   getItemById(id: number | string): Observable<ItemResponse> {

@@ -1,18 +1,20 @@
 <app-navbar></app-navbar>
-
-<form #myForm="ngForm" class="centered-form" style="margin: 3%" (ngSubmit)="updateItem()">
-  <h3 class="text-center mb-4">Dettagli Prodotto
-    <button class="btn btn-outline-warning" (click)="isFormEnabled = true;" *ngIf="!isFormEnabled">Modifica</button>
-    <button class="btn btn-outline-danger" (click)="isFormEnabled = false;" *ngIf="isFormEnabled">Annulla</button>
-  </h3>
-  <div class="row align-items-center">
-    <div class="col-4">
-<!--      empty col to put the image into center   -->
-    </div>
-    <div class="col-4">
-      <img src="http://localhost:8000/images/{{item.photo ? item.photo : this.comingSoonImage}}" class="card-img-top" style="width: 100%; height: 250px">
-    </div>
+<h3 class="text-center mb-4">Dettagli Prodotto
+  <button class="btn btn-outline-warning" (click)="isFormEnabled = true;" *ngIf="!isFormEnabled">Modifica</button>
+  <button class="btn btn-outline-danger" (click)="isFormEnabled = false;" *ngIf="isFormEnabled">Annulla</button>
+</h3>
+<div class="row align-items-center">
+  <div class="col-4">
+    <!--      empty col to put the image into center   -->
   </div>
+  <div class="col-4">
+    <img src="http://localhost:8000/images/{{item.photo ? item.photo : this.comingSoonImage}}" class="card-img-top" style="width: 100%; height: 250px">
+  </div>
+  <div class="col-4">
+    <button class="btn btn-outline-danger" (click)="deletePhoto();" *ngIf="isFormEnabled && item.photo">Elimina Foto</button>
+  </div>
+</div>
+<form #myForm="ngForm" class="centered-form" style="margin: 3%" (ngSubmit)="updateItem()">
   <div class="mb-3">
     <label for="name-val" class="form-label">Nome</label>
     <input type="text" class="form-control" name="name-val" id="name-val"
@@ -71,7 +73,7 @@
             [disabled]="!isFormEnabled"
             name="categoryId"
             required>
-<!--      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>-->
+      <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
     </select>
   </div>
 
@@ -82,8 +84,8 @@
 
   <button type="submit"
           class="btn btn-primary"
-          [disabled]="myForm.invalid && !isFormEnabled">
-    Aggiungi Prodotto
+          [disabled]="myForm.invalid || !isFormEnabled">
+    Modifica Prodotto
   </button>
-  <p *ngIf="showSuccess" class="text-success mt-2">Prodotto inserito con successo.</p>
+  <p *ngIf="showSuccess" class="text-success mt-2">Prodotto modificato con successo.</p>
 </form>

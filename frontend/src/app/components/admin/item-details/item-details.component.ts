@@ -3,6 +3,7 @@ import {CategoryService} from "../../../services/categories/category.service";
 import {ItemService} from "../../../services/items/item.service";
 import {ActivatedRoute} from "@angular/router";
 import {Item} from "../../../models/item";
+import {Category} from "../../../models/category";
 
 @Component({
   selector: 'app-item-details',
@@ -16,6 +17,8 @@ export class ItemDetailsComponent {
   isFormEnabled: boolean = false;
   selectedFile: File | null = null;
   comingSoonImage: string = 'comingsoonimage.jpeg';
+  categories: Category[] = [];
+  idItem: string = "";
 
   constructor(private categoryService: CategoryService, private itemService: ItemService, private route: ActivatedRoute) {
     this.item = {category: "", description: "", fkidcategory: 0, id: 0, name: "", price: 0, quantity: 0, isoffer: false, photo: ""};
@@ -23,19 +26,58 @@ export class ItemDetailsComponent {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const id = params['id']; // Retrieve the id parameter
-      this.itemService.getItemById(id).subscribe(response => {
-        this.item = response.item;
-      })
+      this.idItem = params['id']; // Retrieve the id parameter
+      this.getItemById(this.idItem);
     });
+
+    //get the categories
+    this.getAllCategories();
   }
 
   updateItem() {
+    this.showSuccess = false;
 
+    this.itemService.updateItem(this.item.id, this.item).subscribe(response => {
+      this.showSuccess = true;
+      this.isFormEnabled = false;
+
+      this.updatePhoto();
+    });
+  }
+
+  updatePhoto() {
+
+    const formData = new FormData();
+    formData.append('photo', this.selectedFile as File);
+
+    this.itemService.updateItemPhoto(this.item.id, formData).subscribe(response => {
+      this.item = response.item;
+    })
+
+    this.selectedFile = null;
+  }
+
+
+  getAllCategories() {
+    this.categoryService.getAllCategories().subscribe(response => {
+      this.categories = response.categories;
+    })
   }
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
 
+  getItemById(id: string) {
+    //get the item from the database
+    this.itemService.getItemById(id).subscribe(response => {
+      this.item = response.item;
+    })
+  }
+
+  deletePhoto() {
+    this.itemService.deleteItemPhoto(this.item.id).subscribe(response => {
+      this.item = response.item;
+    });
+  }
 }

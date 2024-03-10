@@ -54,7 +54,9 @@ class Item extends Model
                  description = ?,
                  price = ?,
                  quantity = ?,
-                 fkidcategory = ?
+                 fkidcategory = ?,
+                 photo = ?,
+                 isoffer = ?
              WHERE id = ?";
         return DB::update($query, [
             $item->name,
@@ -62,8 +64,21 @@ class Item extends Model
             $item->price,
             $item->quantity,
             $item->fkidcategory,
+            $item->photo,
+            $item->isoffer,
             $id
         ]);
+    }
+
+    public static function deleteItemPhoto($id) {
+        $sql = "UPDATE items SET photo = null WHERE id = $id";
+        return DB::delete($sql);
+    }
+
+    public static function updateItemPhoto($id, $imageName): int
+    {
+        $sql = "UPDATE items SET photo = ? WHERE id = ?";
+        return DB::update($sql, [$imageName, $id]);
     }
 
     public static function searchItems($searchValue)

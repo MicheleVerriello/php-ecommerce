@@ -15,7 +15,7 @@
   <div class="row" style="margin-top: 20px">
     <div class="col-md-4" *ngFor="let item of items">
       <div class="card mb-3 hover-card" (click)="goToItemDetails(item.id)">
-        <img src="http://localhost:8000/images/{{item.photo ? item.photo : this.comingSoonImage}}" class="card-img-top" style="width: 100%; height: 250px">
+        <img src="http://localhost:8000/images/{{item.photo ? item.photo : this.comingSoonImage}}" alt="assets/{{comingSoonImage}}" class="card-img-top" style="width: 100%; height: 250px">
         <div class="card-body">
           <h5 class="col card-title">
 

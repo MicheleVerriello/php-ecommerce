@@ -1,5 +1,5 @@
 export interface User {
-  id: number | undefined;
+  id: number;
   name: string | undefined;
   surname: string | undefined;
   email: string | undefined;
@@ -12,4 +12,9 @@ export interface User {
 export interface LoginRequest {
   email: string;
   password: string;
+}
+
+export interface ChangePasswordRequest {
+  previousPassword: string;
+  newPassword: string;
 }

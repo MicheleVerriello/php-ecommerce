@@ -36,6 +36,7 @@ class User extends Model
 
     public static function getById(int $id)
     {
-        return DB::table('users')->where('id', $id)->first();
+        $sql = "SELECT * FROM users WHERE id = ?";
+        return DB::selectOne($sql, [$id]);
     }
 }

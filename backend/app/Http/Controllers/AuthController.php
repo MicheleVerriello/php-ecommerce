@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
@@ -28,8 +29,6 @@ class AuthController extends Controller
         } else {
             return response()->json(['error' => 'User Not Found'], 404);
         }
-
-
     }
 
     public function signup(Request $request): JsonResponse
@@ -97,6 +96,17 @@ class AuthController extends Controller
             return response()->json(['user' => $user], 201);
         } else {
             return response()->json(['error' => 'Internal Server Error.'], 500);
+        }
+    }
+
+    public function getUser($id): JsonResponse
+    {
+        Log::info('Request id for getuser', ['id' => $id]);
+        $user = User::getById($id);
+        if($user) {
+            return response()->json(['user' => $user]);
+        } else {
+            return response()->json(['error' => 'User not found.'], 404);
         }
     }
 }

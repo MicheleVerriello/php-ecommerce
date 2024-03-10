@@ -1,1 +1,68 @@
 <app-navbar></app-navbar>
+<div class="container" style="margin-top: 1%">
+  <div class="row">
+    <!-- First column for insert -->
+    <div class="col-md-6">
+      <form #myForm="ngForm" (ngSubmit)="updateUser()">
+        <h3 class="text-center mb-4">Dettagli Profilo</h3>
+        <div class="mb-3">
+          <label for="email" class="form-label">Nome</label>
+          <input type="text" class="form-control" name="name" placeholder="Inserisci nome" id="name" [(ngModel)]="user.name" (ngModelChange)="showError = false" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Cognome</label>
+          <input type="text" class="form-control" name="surname" placeholder="Inserisci cognome" id="surname" [(ngModel)]="user.surname" (ngModelChange)="showError = false" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Indirizzo</label>
+          <input type="text" class="form-control" name="address" placeholder="Inserisci indirizzo" id="address" [(ngModel)]="user.address" (ngModelChange)="showError = false" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Telefono</label>
+          <input type="text" class="form-control" name="phone" placeholder="Inserisci numero di telefono" id="phone" [(ngModel)]="user.phone" (ngModelChange)="showError = false" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" name="email" placeholder="Inserisci email" id="email" [(ngModel)]="user.email" (ngModelChange)="showError = false" required>
+        </div>
+        <br>
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="myForm.invalid || !isFormEnabled">
+          Modifica Utente
+        </button>
+        <p *ngIf="showError" class="text-danger mt-2">Errore durante la modifica. Riprovare.</p>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <form #passwordForm="ngForm" (ngSubmit)="updatePassword()">
+        <h3 class="text-center mb-4">Cambio Password</h3>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password Precedente</label>
+          <div class="input-group">
+            <input type="{{ hideOldPassword ? 'password' : 'text' }}" class="form-control" name="password" id="password" placeholder="Inserisci password precedente" [(ngModel)]="changePasswordRequest.previousPassword" (ngModelChange)="this.showPasswordError = !(this.changePasswordRequest.previousPassword === this.changePasswordRequest.newPassword)" required>
+            <button class="btn btn-outline-secondary" type="button" id="password-toggle" (click)="hideOldPassword = !hideOldPassword">
+              <fa-icon [icon]="hideOldPassword ? faEye : faEyeSlash"></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Nuova Password</label>
+          <div class="input-group">
+            <input type="{{ hideNewPassword ? 'password' : 'text' }}" class="form-control" name="repeatPassword" id="repeatPassword" placeholder="Inserisci nuova password" [(ngModel)]="changePasswordRequest.newPassword" (ngModelChange)="this.showPasswordError = !(this.changePasswordRequest.previousPassword === this.changePasswordRequest.newPassword)" required>
+            <button class="btn btn-outline-secondary" type="button" id="repeated-password-toggle" (click)="hideNewPassword = !hideNewPassword">
+              <fa-icon [icon]="hideNewPassword ? faEye : faEyeSlash"></fa-icon>
+            </button>
+          </div>
+          <p *ngIf="showPasswordError" class="text-danger mt-2">Le due password non combaciano.</p>
+        </div>
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="passwordForm.invalid || showPasswordError">
+          Cambia Password
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

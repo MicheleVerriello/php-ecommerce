@@ -20,13 +20,13 @@ export class SignUpComponent {
 
   constructor(private authorizationService: AuthorizationService, private router: Router) {
     this.user = {
-      id: undefined,
-      name: undefined,
-      surname: undefined,
-      email: undefined,
-      password: undefined,
-      address: undefined,
-      phone: undefined,
+      id: 0,
+      name: "",
+      surname: "",
+      email: "",
+      password: "",
+      address: "",
+      phone: "",
       isAdmin: false
     }
   }
