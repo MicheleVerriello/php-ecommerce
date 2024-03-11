@@ -82,10 +82,18 @@
     <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" [disabled]="!isFormEnabled">
   </div>
 
-  <button type="submit"
-          class="btn btn-primary"
-          [disabled]="myForm.invalid || !isFormEnabled">
-    Modifica Prodotto
-  </button>
+  <div class="row">
+    <div class="col-4">
+      <button type="submit"
+              class="btn btn-primary"
+              [disabled]="myForm.invalid || !isFormEnabled">
+        Modifica Prodotto
+      </button>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4 d-flex justify-content-end align-items-end">
+      <button type="button" class="btn btn-danger" (click)="deleteItem(item.id)">Elimina Prodotto</button>
+    </div>
+  </div>
   <p *ngIf="showSuccess" class="text-success mt-2">Prodotto modificato con successo.</p>
 </form>

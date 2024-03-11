@@ -29,6 +29,6 @@ export class AuthorizationService {
   }
 
   updateUserPassword(id: number, changePasswordRequest: ChangePasswordRequest): Observable<LoginResponse> {
-    return this.http.put<LoginResponse>(`${this.apiUrl}/${id}`, changePasswordRequest);
+    return this.http.put<LoginResponse>(`${this.apiUrl}/${id}/password`, changePasswordRequest);
   }
 }

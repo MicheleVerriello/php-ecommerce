@@ -15,6 +15,5 @@ export interface LoginRequest {
 }
 
 export interface ChangePasswordRequest {
-  previousPassword: string;
   newPassword: string;
 }

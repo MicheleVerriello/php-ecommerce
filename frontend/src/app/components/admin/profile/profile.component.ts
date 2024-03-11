@@ -13,10 +13,15 @@ export class ProfileComponent {
   user: User = {id: 0, name: "", isAdmin: false, password: "", email: "", phone: "", address: "", surname: ""};
   isFormEnabled: boolean = false;
   showError: boolean = false;
-  changePasswordRequest: ChangePasswordRequest = {newPassword: "", previousPassword: ""};
+  changePasswordRequest: ChangePasswordRequest = {newPassword: ""};
   hideOldPassword: boolean = false;
   hideNewPassword: boolean = false;
   showPasswordError: boolean = false;
+  showSuccessChangePassword: boolean = false;
+
+  //icons
+  protected readonly faEye = faEye;
+  protected readonly faEyeSlash = faEyeSlash;
 
   constructor(private authService: AuthorizationService) {
     const id = window.localStorage.getItem('id');
@@ -38,9 +43,7 @@ export class ProfileComponent {
 
     this.authService.updateUserPassword(this.user.id, this.changePasswordRequest).subscribe(response =>{
       this.user = response.user;
+      this.showSuccessChangePassword = true;
     });
   }
-
-  protected readonly faEye = faEye;
-  protected readonly faEyeSlash = faEyeSlash;
 }

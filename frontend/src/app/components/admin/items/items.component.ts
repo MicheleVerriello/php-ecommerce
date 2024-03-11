@@ -45,12 +45,6 @@ export class ItemsComponent {
     });
   }
 
-  deleteItem(id: number) {
-    this.itemService.deleteItem(id).subscribe(response => {
-      this.getAllItems(); //refresh items once one is deleted
-    })
-  }
-
   goToItemDetails(id: number) {
     this.router.navigate([`/admin/items/${id}`]);
   }

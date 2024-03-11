@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {CategoryService} from "../../../services/categories/category.service";
 import {ItemService} from "../../../services/items/item.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Item} from "../../../models/item";
 import {Category} from "../../../models/category";
 
@@ -20,7 +20,10 @@ export class ItemDetailsComponent {
   categories: Category[] = [];
   idItem: string = "";
 
-  constructor(private categoryService: CategoryService, private itemService: ItemService, private route: ActivatedRoute) {
+  constructor(private categoryService: CategoryService,
+              private itemService: ItemService,
+              private route: ActivatedRoute,
+              private router: Router) {
     this.item = {category: "", description: "", fkidcategory: 0, id: 0, name: "", price: 0, quantity: 0, isoffer: false, photo: ""};
   }
 
@@ -68,7 +71,7 @@ export class ItemDetailsComponent {
     this.selectedFile = event.target.files[0];
   }
 
-  getItemById(id: string) {
+  getItemById(id: string | number) {
     //get the item from the database
     this.itemService.getItemById(id).subscribe(response => {
       this.item = response.item;
@@ -79,5 +82,11 @@ export class ItemDetailsComponent {
     this.itemService.deleteItemPhoto(this.item.id).subscribe(response => {
       this.item = response.item;
     });
+  }
+
+  deleteItem(id: number) {
+    this.itemService.deleteItem(id).subscribe(response => {
+      this.router.navigate(['/admin/items']); //refresh items once one is deleted
+    })
   }
 }

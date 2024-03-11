@@ -39,4 +39,29 @@ class User extends Model
         $sql = "SELECT * FROM users WHERE id = ?";
         return DB::selectOne($sql, [$id]);
     }
+
+    public static function updateUser($user)
+    {
+        $sql = "UPDATE users SET
+                     name = ?,
+                     surname = ?,
+                     address = ?,
+                     phone = ?,
+                     email = ?
+                 WHERE id = ?";
+        return DB::update($sql, [
+            $user->name,
+            $user->surname,
+            $user->address,
+            $user->phone,
+            $user->email,
+            $user->id
+        ]);
+    }
+
+    public static function updateUserPassword($id, $hashedNewPassword): int
+    {
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+        return DB::update($sql, [$hashedNewPassword, $id]);
+    }
 }

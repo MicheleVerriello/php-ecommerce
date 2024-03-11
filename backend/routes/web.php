@@ -27,6 +27,7 @@ Route::post('/api/auth/login', [AuthController::class, 'login']);
 Route::post('/api/auth/signup', [AuthController::class, 'signup']);
 Route::get('/api/auth/{id}', [AuthController::class, 'getUser']);
 Route::put('/api/auth/{id}', [AuthController::class, 'updateUser']);
+Route::put('/api/auth/{id}/password', [AuthController::class, 'updateUserPassword']);
 
 // items
 Route::post('/api/items', [ItemController::class, 'insertItem']);
