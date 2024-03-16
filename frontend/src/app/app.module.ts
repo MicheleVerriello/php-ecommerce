@@ -21,6 +21,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewItemComponent } from './components/admin/new-item/new-item.component';
 import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
 import { ItemDetailsComponent } from './components/admin/item-details/item-details.component';
+import { NavbarUserComponent } from './components/user/navbar-user/navbar-user.component';
+import { CartComponent } from './components/user/cart/cart.component';
+import { OrdersComponent } from './components/user/orders/orders.component';
+import { OffersComponent } from './components/user/offers/offers.component';
 
 // Add icons to the library (you can add more icons as needed)
 library.add(fas, faEye, faEyeSlash);
@@ -36,7 +40,11 @@ library.add(fas, faEye, faEyeSlash);
     NavbarComponent,
     NewItemComponent,
     AddCategoryComponent,
-    ItemDetailsComponent
+    ItemDetailsComponent,
+    NavbarUserComponent,
+    CartComponent,
+    OrdersComponent,
+    OffersComponent
   ],
   imports: [
     BrowserModule,

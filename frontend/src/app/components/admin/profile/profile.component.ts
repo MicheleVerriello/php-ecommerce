@@ -14,10 +14,9 @@ export class ProfileComponent {
   isFormEnabled: boolean = false;
   showError: boolean = false;
   changePasswordRequest: ChangePasswordRequest = {newPassword: ""};
-  hideOldPassword: boolean = false;
   hideNewPassword: boolean = false;
-  showPasswordError: boolean = false;
   showSuccessChangePassword: boolean = false;
+  showSuccessUpdateProfile: boolean = false;
 
   //icons
   protected readonly faEye = faEye;
@@ -34,9 +33,16 @@ export class ProfileComponent {
     });
   }
   updateUser() {
-    this.authService.updateUserDetails(this.user).subscribe(response =>{
-      this.user = response.user;
-    });
+    this.showSuccessUpdateProfile = false;
+    this.showError = false;
+    this.authService.updateUserDetails(this.user).subscribe(response => {
+        this.user = response.user;
+        this.showSuccessUpdateProfile = true;
+      },
+      error => {
+        this.showError = true;
+      }
+    );
   }
 
   updatePassword() {

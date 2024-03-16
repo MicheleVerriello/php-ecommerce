@@ -13,7 +13,7 @@
           <label for="email" class="form-label">Nome</label>
           <input type="text" class="form-control" name="name" placeholder="Inserisci nome" id="name"
                  [(ngModel)]="user.name"
-                 (ngModelChange)="showError = false"
+                 (ngModelChange)="showError = false; showSuccessUpdateProfile = false"
                  [disabled]="!isFormEnabled"
                  required>
         </div>
@@ -21,7 +21,7 @@
           <label for="email" class="form-label">Cognome</label>
           <input type="text" class="form-control" name="surname" placeholder="Inserisci cognome" id="surname"
                  [(ngModel)]="user.surname"
-                 (ngModelChange)="showError = false"
+                 (ngModelChange)="showError = false; showSuccessUpdateProfile = false"
                  [disabled]="!isFormEnabled"
                  required>
         </div>
@@ -29,7 +29,7 @@
           <label for="email" class="form-label">Indirizzo</label>
           <input type="text" class="form-control" name="address" placeholder="Inserisci indirizzo" id="address"
                  [(ngModel)]="user.address"
-                 (ngModelChange)="showError = false"
+                 (ngModelChange)="showError = false; showSuccessUpdateProfile = false"
                  [disabled]="!isFormEnabled"
                  required>
         </div>
@@ -37,7 +37,7 @@
           <label for="email" class="form-label">Telefono</label>
           <input type="text" class="form-control" name="phone" placeholder="Inserisci numero di telefono" id="phone"
                  [(ngModel)]="user.phone"
-                 (ngModelChange)="showError = false"
+                 (ngModelChange)="showError = false; showSuccessUpdateProfile = false"
                  [disabled]="!isFormEnabled"
                  required>
         </div>
@@ -45,7 +45,7 @@
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" name="email" placeholder="Inserisci email" id="email"
                  [(ngModel)]="user.email"
-                 (ngModelChange)="showError = false"
+                 (ngModelChange)="showError = false; showSuccessUpdateProfile = false"
                  [disabled]="!isFormEnabled"
                  required>
         </div>
@@ -55,6 +55,7 @@
                 [disabled]="myForm.invalid || !isFormEnabled">
           Modifica Utente
         </button>
+        <p *ngIf="showSuccessUpdateProfile" class="text-success mt-2">Dati modificati con successo.</p>
         <p *ngIf="showError" class="text-danger mt-2">Errore durante la modifica. Riprovare.</p>
       </form>
     </div>
