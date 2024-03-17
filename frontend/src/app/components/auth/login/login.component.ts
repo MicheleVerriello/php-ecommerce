@@ -31,10 +31,11 @@ export class LoginComponent {
 
     this.authorizationService.login(this.loginRequest).subscribe(response => {
         window.localStorage.setItem('id', response.user.id ? response.user.id.toString() : '0');
-      if(response.user.isAdmin) { // go to admin panel
+        window.localStorage.setItem('isAdmin', response.user.isAdmin ? 'true' : 'false');
+        if(response.user.isAdmin) { // go to admin panel
         this.router.navigate(['/admin/items']);
       } else { // go to user panel
-        this.router.navigate(['/user/home', response.user.id]);
+        this.router.navigate(['/user/home']);
       }
     },
     error => {

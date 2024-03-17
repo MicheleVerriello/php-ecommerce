@@ -8,17 +8,28 @@ import {NewItemComponent} from "./components/admin/new-item/new-item.component";
 import {AddCategoryComponent} from "./components/admin/add-category/add-category.component";
 import {ProfileComponent} from "./components/admin/profile/profile.component";
 import {ItemDetailsComponent} from "./components/admin/item-details/item-details.component";
+import {OffersComponent} from "./components/user/offers/offers.component";
+import {OrdersComponent} from "./components/user/orders/orders.component";
+import {CartComponent} from "./components/user/cart/cart.component";
+import {UserItemsComponent} from "./components/user/user-items/user-items.component";
 
 const routes: Routes = [
+  // general side
   {path: '', component: LoginComponent},
   {path: 'auth/login', component: LoginComponent},
   {path: 'auth/signup', component: SignUpComponent},
-  {path: 'user/home/:id', component: HomeComponent},
   {path: 'profile', component: ProfileComponent},
+  // admin side
   {path: 'admin/items', component: ItemsComponent},
   {path: 'admin/items/new', component: NewItemComponent},
   {path: 'admin/items/:id', component: ItemDetailsComponent},
-  {path: 'admin/categories/new', component: AddCategoryComponent}
+  {path: 'admin/categories/new', component: AddCategoryComponent},
+  // user side
+  {path: 'user/home', component: HomeComponent},
+  {path: 'user/offers', component: OffersComponent},
+  {path: 'user/orders', component: OrdersComponent},
+  {path: 'user/cart', component: CartComponent},
+  {path: 'user/items', component: UserItemsComponent}
 ];
 
 @NgModule({

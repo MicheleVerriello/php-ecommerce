@@ -38,9 +38,12 @@ export class ProfileComponent {
     this.authService.updateUserDetails(this.user).subscribe(response => {
         this.user = response.user;
         this.showSuccessUpdateProfile = true;
+        this.isFormEnabled = false;
       },
       error => {
         this.showError = true;
+        this.isFormEnabled = false;
+        this.getUser(this.user.id.toString());
       }
     );
   }

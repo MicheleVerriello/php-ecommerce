@@ -13,9 +13,5 @@ export class HomeComponent {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.idUser = +params['id']; // Convert the parameter to a number
-      console.log(this.idUser);
-    });
   }
 }
