@@ -89,4 +89,12 @@ export class ItemDetailsComponent {
       this.router.navigate(['/admin/items']); //refresh items once one is deleted
     })
   }
+
+  isAdmin(): boolean {
+    let isAdmin = window.localStorage.getItem('isAdmin');
+
+    if(isAdmin != null && isAdmin === 'true') return true;
+
+    return false;
+  }
 }

@@ -1,0 +1,17 @@
+.hover-card:hover {
+  border: 3px solid rgba(0, 128, 0, 0.7);
+  cursor: pointer;
+  transition: border 0.5s ease;
+}
+
+.offerta-label {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  background-color: red; /* Background color of the label */
+  color: white; /* Text color of the label */
+  padding: 5px 10px; /* Adjust padding as needed */
+  z-index: 1; /* Ensure it appears above the image */
+  border-radius: 10px;
+}
+

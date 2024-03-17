@@ -3,6 +3,7 @@ import {Item} from "../../../models/item";
 import {ItemService} from "../../../services/items/item.service";
 import {CategoryService} from "../../../services/categories/category.service";
 import {Router} from "@angular/router";
+import {faCartShopping, faCircleInfo} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-user-items',
@@ -14,6 +15,8 @@ export class UserItemsComponent {
   items: Item[] = []; //initializing empty products array
   searchValue: string = ''; // empty search value
   comingSoonImage: string = 'comingsoonimage.jpeg';
+  readonly cartShoppingIcon = faCartShopping;
+  readonly faCircleInfo = faCircleInfo;
 
   constructor(private itemService: ItemService, private categoryService: CategoryService, private router: Router) {}
 
