@@ -39,11 +39,11 @@ Route::get('/api/items/{id}',  [ItemController::class, 'getItem']);
 Route::get('/api/items', [ItemController::class, 'getItems']);
 
 // cart
-Route::post('/api/carts/{idUser}', [CartController::class, 'createCart']);
 Route::post('/api/carts/items', [CartController::class, 'insertItemIntoCart']);
 Route::put('/api/carts/items/{idCartItem}', [CartController::class, 'updateCartItemQuantity']);
 Route::delete('/api/carts/items/{idCartItem}', [CartController::class, 'deleteCartItem']);
-Route::get('/api/carts/{idUser}', [CartController::class, 'getCart']);
+Route::get('/api/carts/{idUser}', [CartController::class, 'getCartByUserId']);
+Route::delete('/api/carts/{idUser}', [CartController::class, 'clearCart']);
 
 // orders
 Route::post('/api/orders', [OrderController::class, 'insertOrder']);
