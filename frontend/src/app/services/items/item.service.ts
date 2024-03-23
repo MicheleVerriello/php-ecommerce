@@ -41,7 +41,11 @@ export class ItemService {
     return this.http.get<ItemResponse>(`${this.apiUrl}/${id}`);
   }
 
-  searchItems(searchValue: string): Observable<ItemsResponse> {
-    return this.http.get<ItemsResponse>(`${this.apiUrl}/?searchValue=${searchValue}`);
+  searchItems(searchValue: string, isOffer: boolean, fkIdCategory: number |string | null): Observable<ItemsResponse> {
+    let queryParams = `searchValue=${searchValue}`;
+    if(isOffer) queryParams += `&isOffer=${isOffer}`;
+    if(fkIdCategory != null) queryParams += `&fkIdCategory=${fkIdCategory}`;
+    console.log(queryParams);
+    return this.http.get<ItemsResponse>(`${this.apiUrl}/?${queryParams}`);
   }
 }

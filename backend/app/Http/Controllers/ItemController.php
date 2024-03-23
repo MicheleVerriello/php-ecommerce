@@ -169,14 +169,16 @@ class ItemController extends Controller
 
     public function getItems(Request $request): JsonResponse
     {
-
         $searchValue = $request->query('searchValue');
+        $isOffer = $request->query('isOffer');
+        $fkIdCategory = $request->query('fkIdCategory');
 
-        if($searchValue != null) {
-            $items = Item::searchItems($searchValue);
-        } else {
-            $items = Item::getAllItems();
-        }
+        Log::info('searchValue: ', [$searchValue]);
+        Log::info('$isOffer: ', [$isOffer]);
+        Log::info('$fkIdCategory: ', [$fkIdCategory]);
+
+        $items = Item::searchItems($searchValue, $isOffer, $fkIdCategory);
+
         return response()->json(['items' => $items]);
     }
 }

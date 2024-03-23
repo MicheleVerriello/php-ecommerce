@@ -35,7 +35,7 @@ export class ItemsComponent {
   }
 
   searchItems(): void {
-    this.itemService.searchItems(this.searchValue).subscribe(response => {
+    this.itemService.searchItems(this.searchValue, false, null).subscribe(response => {
       this.items = response.items;
       for (let item of this.items) {
         this.categoryService.getCategoryById(item.fkidcategory).subscribe(categoryResponse => {

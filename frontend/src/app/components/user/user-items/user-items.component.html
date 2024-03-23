@@ -3,10 +3,30 @@
   <h3 class="text-center mb-4">Lista Prodotti</h3>
   <!-- Search input section -->
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="input-group mt-3">
         <input type="text" class="form-control" [(ngModel)]="searchValue" (input)="searchItems()" placeholder="Cerca prodotti...">
         <button class="btn btn-outline-success" type="button" (click)="searchItems()">Cerca</button>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="input-group mt-3">
+        <button class="btn btn-success" type="button" disabled>
+          Filtra per categoria
+        </button>
+        <select class="form-select"
+                aria-label="categories"
+                id="categories"
+                [(ngModel)]="categoryFilterId"
+                name="categoryId"
+                (ngModelChange)="searchItems()"
+        >
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+
+        <button class="btn btn-outline-danger" type="button" (click)="categoryFilterId = null; searchItems()">
+          <fa-icon [icon]="faClose"></fa-icon>
+        </button>
       </div>
     </div>
   </div>
@@ -48,7 +68,7 @@
               </button>
             </div>
             <div class="col-6">
-              <button class="btn btn-success" type="button">
+              <button class="btn btn-success" type="button" (click)="addToCart(item.id)">
               Aggiungi al Carrello
               <fa-icon [icon]="cartShoppingIcon"></fa-icon>
             </button>

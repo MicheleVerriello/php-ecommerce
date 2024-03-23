@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Item extends Model
 {
@@ -81,9 +82,37 @@ class Item extends Model
         return DB::update($sql, [$imageName, $id]);
     }
 
-    public static function searchItems($searchValue)
+    public static function searchItems($searchValue, $isOffer, $fkIdCategory)
     {
-        $sql = "SELECT * FROM items WHERE name ILIKE '%$searchValue%'";
-        return DB::select($sql);
+        $sql = 'SELECT * FROM items WHERE 1 = 1';
+
+
+        if($searchValue != null) {
+            $searchValueQuery = " AND name ILIKE '%$searchValue%'";
+            $sql = $sql . $searchValueQuery;
+            Log::info('$sql: ', [$sql]);
+        }
+        if($isOffer != null) {
+            $isOfferQuery = ' AND isOffer = true';
+            $sql = $sql . $isOfferQuery;
+            Log::info('$sql: ', [$sql]);
+        }
+
+        if($fkIdCategory != null) {
+            $fkIdCategoryQuery = ' AND fkIdCategory = ?';
+            $sql = $sql . $fkIdCategoryQuery;
+            Log::info('$sql: ', [$sql]);
+            $result = DB::select($sql, [$fkIdCategory]);
+        } else {
+            Log::info('$sql: ', [$sql]);
+            $result = DB::select($sql);
+        }
+
+        return $result;
+    }
+
+    public static function decreseQuantity($id, $value) {
+        $sql = "UPDATE items SET quantity = quantity - $value WHERE id = $id";
+        return DB::delete($sql);
     }
 }

@@ -14,15 +14,15 @@ class CartController extends Controller
     {
         try {
             $this->validate($request, [
-                'fkIdUser' => 'required|integer',
-                'fkIdItem' => 'required|integer'
+                'fkiduser' => 'required|integer',
+                'fkiditem' => 'required|integer'
             ]);
         } catch (ValidationException $exception) {
             return response()->json(['error' => 'The sent values are not valid. ' . $exception->getMessage()], 400);
         }
 
 
-        $cartItem = CartItem::addItemToCart($request->input('fkIdUser'), $request->input('fkIdItem'), 1);
+        $cartItem = CartItem::addItemToCart($request->input('fkiduser'), $request->input('fkiditem'), 1);
 
         if ($cartItem) {
             return response()->json(['success' => $cartItem], 200);
