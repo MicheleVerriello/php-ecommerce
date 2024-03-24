@@ -4,10 +4,11 @@
   <!-- Items section -->
   <div class="row">
     <div class="col-md-6">
-      <div class="card mb-3" style="max-width: 540px;" *ngFor="let visualizableCartItem of visualizableItems">
+      <h3>Prodotti nel carrello</h3>
+      <div class="card mb-3" style="max-width: 540px; max-height: 135px;" *ngFor="let visualizableCartItem of visualizableItems">
         <div class="row g-0">
           <div class="col-md-6">
-            <img src="http://localhost:8000/images/{{visualizableCartItem.item.photo ? visualizableCartItem.item.photo : this.comingSoonImage}}" alt="assets/{{comingSoonImage}}" class="img-fluid rounded-start" style="width: 100%; height: 250px">
+            <img src="http://localhost:8000/images/{{visualizableCartItem.item.photo ? visualizableCartItem.item.photo : this.comingSoonImage}}" alt="assets/{{comingSoonImage}}" class="img-fluid rounded-start" style="width: 100%; height: 135px">
           </div>
           <div class="col-md-6" style="padding: 5px">
             <h5 class="col card-title">
@@ -23,16 +24,15 @@
                 <p class="card-text"><b>Prezzo</b> {{visualizableCartItem.item.price}}$</p>
               </div>
             </div>
+            <br>
             <div class="row">
               <div class="col-6">
-                <button class="btn btn-primary" type="button" (click)="deleteItemFromCart(visualizableCartItem.cartItem.id)">
-                  Rimuovi
+                <button class="btn btn-danger" type="button" (click)="deleteItemFromCart(visualizableCartItem.cartItem.id)">
                   <fa-icon [icon]="faTrash"></fa-icon>
                 </button>
               </div>
               <div class="col-6">
                 <div class="mb-3">
-                  <label for="quantity" class="form-label">Quantità</label>
                   <select class="form-select"
                           aria-label="quantity"
                           id="quantity"
@@ -41,7 +41,7 @@
                           (ngModelChange)="updateCartItemQuantity(visualizableCartItem.cartItem)"
                           required
                   >
-                    <option *ngFor="let quantity of createArray(visualizableCartItem.item.quantity)" [value]="visualizableCartItem.cartItem.quantity">{{quantity}}</option>
+                    <option *ngFor="let quantity of createArray(visualizableCartItem.item.quantity)" [value]="quantity">{{quantity}}</option>
                   </select>
                 </div>
               </div>
@@ -49,8 +49,12 @@
           </div>
         </div>
       </div>
+      <button class="btn btn-danger" type="button" (click)="clearCart()" *ngIf="visualizableItems.length > 0">
+        <fa-icon [icon]="faTrash"></fa-icon>
+        Elimina tutti gli elementi dal carrello
+      </button>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 d-flex justify-content-center">
       <h3>Procedi all' ordine</h3>
     </div>
   </div>

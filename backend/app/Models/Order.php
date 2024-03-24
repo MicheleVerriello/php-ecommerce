@@ -12,4 +12,9 @@ class Order extends Model
         'totalPrice',
         'creationDate'
     ];
+
+    public static function createOrder($order)
+    {
+        $query = "INSERT INTO orders (fkiduser, totalPrice, creationDate) VALUES (?, ?, ?)";
+    }
 }

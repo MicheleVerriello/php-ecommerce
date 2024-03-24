@@ -6,7 +6,7 @@ import {
   faDoorClosed,
   faEye,
   faEyeSlash,
-  faRightFromBracket
+  faRightFromBracket, faUser
 } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
@@ -44,4 +44,10 @@ export class NavbarComponent implements OnInit {
   goToCart() {
     this.router.navigate(['/user/cart']);
   }
+
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
+  protected readonly faUser = faUser;
 }

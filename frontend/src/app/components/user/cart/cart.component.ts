@@ -56,4 +56,10 @@ export class CartComponent implements OnInit {
     return  Array.from({length: endValue}, (_, i) => i + 1); //create array of number from 1 to endValue
   }
 
+  clearCart() {
+    this.cartService.clearCart(this.userId).subscribe(() => {
+      this.visualizableItems = [];
+      this.cartItems = [];
+    })
+  }
 }

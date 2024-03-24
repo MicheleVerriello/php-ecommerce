@@ -15,3 +15,15 @@
   border-radius: 10px;
 }
 
+.sold-out-label {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  background-color: darkorange; /* Background color of the label */
+  color: white; /* Text color of the label */
+  padding: 5px 10px; /* Adjust padding as needed */
+  z-index: 1; /* Ensure it appears above the image */
+  border-radius: 10px;
+}
+
+
