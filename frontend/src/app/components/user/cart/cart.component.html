@@ -38,7 +38,7 @@
                           id="quantity"
                           [(ngModel)]="visualizableCartItem.cartItem.quantity"
                           name="quantity"
-                          (ngModelChange)="updateCartItemQuantity(visualizableCartItem.cartItem)"
+                          (ngModelChange)="this.updateCartItem(visualizableCartItem.cartItem)"
                           required
                   >
                     <option *ngFor="let quantity of createArray(visualizableCartItem.item.quantity)" [value]="quantity">{{quantity}}</option>
@@ -54,8 +54,63 @@
         Elimina tutti gli elementi dal carrello
       </button>
     </div>
-    <div class="col-md-6 d-flex justify-content-center">
+    <div class="col-md-6">
       <h3>Procedi all' ordine</h3>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Checkout</h5>
+            <p class="card-text">In questa sezione troverai il riassunto dell' ordine con il prezzo totale da pagare.</p>
+            <br>
+            <p class="card-text">
+              <b>Numero prodotti:</b> {{ visualizableItems.length }}
+              <br>
+              <b>Prezzo totale:</b> {{ totalPrice }}$
+            </p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <img src="assets/paypal.svg" width="24" height="24">
+              Paga con PayPal
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Payment -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Pagamento</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h5>Scontrino</h5>
+          <br>
+          <div *ngFor="let visualizableCartItem of this.visualizableItems">
+            <div class="d-flex justify-content-between">
+              <span>{{ visualizableCartItem.item.name }}</span>
+              <span>{{ visualizableCartItem.item.price }}$ &nbsp;&nbsp; x{{ visualizableCartItem.cartItem.quantity }}</span>
+            </div>
+            <hr class="divider">
+          </div>
+          <br>
+          <div class="d-flex justify-content-between">
+            <span>Totale:</span>
+            <span>{{ totalPrice }}$</span>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="placeOrder()">
+              <img src="assets/paypal.svg" width="24" height="24">
+              Paga {{ totalPrice }}$ con PayPal
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

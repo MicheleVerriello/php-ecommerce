@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -13,8 +14,12 @@ class Order extends Model
         'creationDate'
     ];
 
-    public static function createOrder($order)
+    public static function createOrder($fkiduser, $totalPrice)
     {
-        $query = "INSERT INTO orders (fkiduser, totalPrice, creationDate) VALUES (?, ?, ?)";
+        $query = 'INSERT INTO orders (fkiduser, "totalPrice") VALUES (?, ?, ?)';
+        DB::insert($query, [
+            $fkiduser,
+            $totalPrice
+        ]);
     }
 }

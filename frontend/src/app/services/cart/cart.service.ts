@@ -25,7 +25,7 @@ export class CartService {
   }
 
   updateCartItemQuantity(cartItem: CartItem): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/items/${cartItem.id}`, cartItem);
+    return this.http.put<any>(`${this.apiUrl}/items/${cartItem.id}`, cartItem);
   }
 
   clearCart(idUser: number): Observable<any> {

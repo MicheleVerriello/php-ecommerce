@@ -27,7 +27,7 @@ class CartItem extends Model
     }
 
     public static function getCartByUserId($idUser) {
-        $query = 'SELECT * FROM cartitems WHERE fkiduser = ?';
+        $query = 'SELECT * FROM cartitems WHERE fkiduser = ? ORDER BY id ASC';
         return DB::select($query, [$idUser]);
     }
 

@@ -4,7 +4,7 @@ export interface CartItem {
   id: number;
   fkiduser: number;
   fkiditem: number;
-  quantity: number | null;
+  quantity: number;
 }
 
 export interface VisualizableCartItem {

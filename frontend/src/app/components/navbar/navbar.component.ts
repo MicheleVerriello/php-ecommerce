@@ -2,10 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {
   faCartShopping,
-  faClose,
-  faDoorClosed,
-  faEye,
-  faEyeSlash,
   faRightFromBracket, faUser
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,7 +14,6 @@ export class NavbarComponent implements OnInit {
 
   readonly cartShoppingIcon = faCartShopping;
   readonly logoutIcon = faRightFromBracket;
-
 
   constructor(private router: Router) {}
 
@@ -34,7 +29,6 @@ export class NavbarComponent implements OnInit {
     let isAdmin = window.localStorage.getItem('isAdmin');
 
     if(isAdmin != null) {
-      console.log(isAdmin === 'true')
       return isAdmin === 'true';
     } else {
       return false;

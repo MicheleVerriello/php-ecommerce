@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {ItemResponse, ItemsResponse} from "../../models/responses/item-response";
 import {Observable} from "rxjs";
 import {Item} from "../../models/item";
-import {CategoryPagedResponse} from "../../models/responses/category-response";
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +44,6 @@ export class ItemService {
     let queryParams = `searchValue=${searchValue}`;
     if(isOffer) queryParams += `&isOffer=${isOffer}`;
     if(fkIdCategory != null) queryParams += `&fkIdCategory=${fkIdCategory}`;
-    console.log(queryParams);
     return this.http.get<ItemsResponse>(`${this.apiUrl}/?${queryParams}`);
   }
 }

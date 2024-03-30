@@ -3,6 +3,9 @@ import {CartService} from "../../../services/cart/cart.service";
 import {ItemService} from "../../../services/items/item.service";
 import {CartItem, VisualizableCartItem} from "../../../models/cart";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {forkJoin} from "rxjs";
+import {OrderRequest} from "../../../models/orders";
+import {OrderService} from "../../../services/orders/order.service";
 
 @Component({
   selector: 'app-cart',
@@ -15,9 +18,10 @@ export class CartComponent implements OnInit {
   visualizableItems: VisualizableCartItem[] = [];
   userId: number = 0;
   comingSoonImage: string = 'comingsoonimage.jpeg';
+  totalPrice: number = 0;
   protected readonly faTrash = faTrash;
 
-  constructor(private cartService: CartService, private itemService: ItemService) {
+  constructor(private cartService: CartService, private itemService: ItemService, private orderService: OrderService) {
   }
 
   ngOnInit() {
@@ -29,27 +33,27 @@ export class CartComponent implements OnInit {
     this.visualizableItems = [];
     this.cartService.getCartByUserId(this.userId).subscribe(response => {
       this.cartItems = response.cartItems;
-      for(let cartItem of this.cartItems) {
-        this.itemService.getItemById(cartItem.fkiditem).subscribe(response => {
+      const observables = this.cartItems.map(cartItem =>
+        this.itemService.getItemById(cartItem.fkiditem)
+      );
+      forkJoin(observables).subscribe((responses: any[]) => {
+        responses.forEach((response: any, index: number) => {
           const item = response.item;
           const visualizableCartItem = {
-            cartItem: cartItem,
+            cartItem: this.cartItems[index],
             item: item
-          }
+          };
           this.visualizableItems.push(visualizableCartItem);
-        })
-      }
-    })
+        });
+        this.totalPrice = this.calculateTotalPrice();
+      });
+    });
   }
 
   deleteItemFromCart(id: number) {
     this.cartService.removeItemFromCart(id).subscribe(() => {
       this.getAllCartItems();
     })
-  }
-
-  updateCartItemQuantity(cartItem: CartItem) {
-
   }
 
   createArray(endValue: number): number[] {
@@ -61,5 +65,31 @@ export class CartComponent implements OnInit {
       this.visualizableItems = [];
       this.cartItems = [];
     })
+  }
+
+  calculateTotalPrice(): number {
+    let totalPrice = 0;
+
+    for(let visualizableItem of this.visualizableItems) {
+      totalPrice = totalPrice + (visualizableItem.cartItem.quantity * visualizableItem.item.price)
+    }
+
+    return totalPrice;
+  }
+
+  updateCartItem(cartItem: CartItem) {
+    this.cartService.updateCartItemQuantity(cartItem).subscribe(() => {
+      this.totalPrice = this.calculateTotalPrice();
+    })
+  }
+
+  placeOrder() {
+    let orderRequest: OrderRequest = {
+      fkiduser: this.userId,
+      totalPrice: this.totalPrice,
+      orderItems: this.cartItems
+    }
+
+    this.orderService
   }
 }

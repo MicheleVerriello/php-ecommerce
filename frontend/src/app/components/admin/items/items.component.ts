@@ -18,9 +18,7 @@ export class ItemsComponent {
   constructor(private itemService: ItemService, private categoryService: CategoryService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit');
     this.getAllItems();
-
   }
 
   getAllItems(): void {
