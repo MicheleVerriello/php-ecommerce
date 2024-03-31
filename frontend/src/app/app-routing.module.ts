@@ -7,7 +7,6 @@ import {NewItemComponent} from "./components/admin/new-item/new-item.component";
 import {AddCategoryComponent} from "./components/admin/add-category/add-category.component";
 import {ProfileComponent} from "./components/admin/profile/profile.component";
 import {ItemDetailsComponent} from "./components/admin/item-details/item-details.component";
-import {OffersComponent} from "./components/user/offers/offers.component";
 import {OrdersComponent} from "./components/user/orders/orders.component";
 import {CartComponent} from "./components/user/cart/cart.component";
 import {UserItemsComponent} from "./components/user/user-items/user-items.component";
@@ -25,7 +24,6 @@ const routes: Routes = [
   {path: 'admin/items/:id', component: ItemDetailsComponent},
   {path: 'admin/categories/new', component: AddCategoryComponent},
   // user side
-  {path: 'user/offers', component: OffersComponent},
   {path: 'user/orders', component: OrdersComponent},
   {path: 'user/cart', component: CartComponent},
   {path: 'user/items', component: UserItemsComponent},

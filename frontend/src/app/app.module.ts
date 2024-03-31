@@ -22,7 +22,6 @@ import { AddCategoryComponent } from './components/admin/add-category/add-catego
 import { ItemDetailsComponent } from './components/admin/item-details/item-details.component';
 import { CartComponent } from './components/user/cart/cart.component';
 import { OrdersComponent } from './components/user/orders/orders.component';
-import { OffersComponent } from './components/user/offers/offers.component';
 import { UserItemsComponent } from './components/user/user-items/user-items.component';
 import { ContactsComponent } from './components/user/contacts/contacts.component';
 
@@ -42,7 +41,6 @@ library.add(fas, faEye, faEyeSlash);
     ItemDetailsComponent,
     CartComponent,
     OrdersComponent,
-    OffersComponent,
     UserItemsComponent,
     ContactsComponent
   ],
