@@ -10,7 +10,6 @@ import { HttpClientModule} from "@angular/common/http";
 import {AuthorizationService} from "./services/auth/authorization.service";
 import { ProfileComponent } from './components/admin/profile/profile.component';
 import { ItemsComponent } from './components/admin/items/items.component';
-import { HomeComponent } from './components/user/home/home.component';
 import {fas} from '@fortawesome/free-solid-svg-icons';
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 import {library} from "@fortawesome/fontawesome-svg-core";
@@ -36,7 +35,6 @@ library.add(fas, faEye, faEyeSlash);
     SignUpComponent,
     ProfileComponent,
     ItemsComponent,
-    HomeComponent,
     NavbarComponent,
     NewItemComponent,
     AddCategoryComponent,

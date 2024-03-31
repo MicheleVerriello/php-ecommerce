@@ -68,6 +68,9 @@
               <br>
               <b>Prezzo totale:</b> {{ totalPrice }}$
             </p>
+            <div class="alert alert-warning d-flex justify-content-between" role="alert">
+              <span>Data di consegna stimata:</span> <span>{{ calculateDeliveryDate() }}</span>
+            </div>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
               <img src="assets/paypal.svg" width="24" height="24">
               Paga con PayPal

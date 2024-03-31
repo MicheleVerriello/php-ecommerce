@@ -6,6 +6,7 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {forkJoin} from "rxjs";
 import {OrderRequest} from "../../../models/orders";
 import {OrderService} from "../../../services/orders/order.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -21,8 +22,10 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
   protected readonly faTrash = faTrash;
 
-  constructor(private cartService: CartService, private itemService: ItemService, private orderService: OrderService) {
-  }
+  constructor(private cartService: CartService,
+              private itemService: ItemService,
+              private orderService: OrderService,
+              private router: Router) {}
 
   ngOnInit() {
     this.userId = Number(window.localStorage.getItem('id'));
@@ -90,6 +93,22 @@ export class CartComponent implements OnInit {
       orderItems: this.cartItems
     }
 
-    this.orderService
+    this.orderService.placeOrder(orderRequest).subscribe(response => {
+      this.clearCart();
+      this.router.navigate(['/user/orders']);
+    })
+  }
+
+  protected readonly Date = Date;
+
+  calculateDeliveryDate(): string {
+    let deliveryDate = new Date();
+    deliveryDate.setDate(deliveryDate.getDate() + 2);
+
+    // Options to format the date
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+    // Format the date using the specified options
+    return deliveryDate.toLocaleDateString('it-IT', options);
   }
 }

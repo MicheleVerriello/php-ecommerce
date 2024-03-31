@@ -47,9 +47,10 @@ Route::delete('/api/carts/{idUser}', [CartController::class, 'clearCart']);
 
 // orders
 Route::post('/api/orders', [OrderController::class, 'insertOrder']);
-Route::get('/api/orders/{idUser}', [OrderController::class, 'getOrdersByUserId']);
+Route::get('/api/orders/users/{idUser}', [OrderController::class, 'getOrdersByUserId']);
 Route::get('/api/orders/{id}', [OrderController::class, 'getOrderDetails']);
 Route::delete('/api/orders/{id}', [OrderController::class, 'deleteOrder']);
+Route::get('/api/orders/items/{idOrder}', [OrderController::class, 'getOrderItemsByOrderId']);
 
 // categories
 Route::post('/api/categories', [CategoryController::class, 'addCategory']);

@@ -79,7 +79,7 @@
 
   <div class="mb-3" *ngIf="isAdmin()">
     <label for="formFile" class="form-label">Immagine</label>
-    <input class="form-control" type="file" id="formFile" (change)="onFileSelected($event)" [disabled]="!isFormEnabled">
+    <input #fileInputRef class="form-control" type="file" id="formFile" (change)="updatePhoto($event)" [disabled]="!isFormEnabled">
   </div>
 
   <div class="row" *ngIf="isAdmin()">

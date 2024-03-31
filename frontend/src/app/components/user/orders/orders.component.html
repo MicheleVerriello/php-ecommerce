@@ -1,2 +1,40 @@
 <app-navbar></app-navbar>
-<p>orders works!</p>
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <h1>Riepilogo Ordini</h1>
+  </div>
+  <br>
+  <div class="accordion" id="accordionPanels" *ngFor="let order of visualizableOrders">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" (click)="order.order.isOpen = !order.order.isOpen">
+          Ordine del {{order.order.creationDate}}&nbsp;&nbsp;
+          <span class="badge text-bg-warning" *ngIf="!order.order.delivered">In Transito: in arrivo {{order.order.deliveryDateString}}</span>
+          <span class="badge text-bg-success" *ngIf="order.order.delivered">Consegnato: consegnato {{order.order.deliveryDateString}}</span>
+        </button>
+      </h2>
+      <div class="accordion-collapse collapse show" *ngIf="order.order.isOpen">
+        <div class="accordion-body">
+          <div class="d-flex justify-content-between">
+            <span><b>Nome</b>(<b>Quantità</b>)</span>
+            <span><b>Prezzo</b></span>
+          </div>
+          <br>
+          <div *ngFor="let item of order.items">
+            <div class="d-flex justify-content-between">
+              <span><b>{{ item.name }}</b>({{ item.quantity }})</span>
+              <span>{{ item.price }}$</span>
+            </div>
+            <hr class="divider">
+          </div>
+          <br>
+          <div class="d-flex justify-content-between">
+            <span><b>Totale Pagato:</b></span>
+            <span>{{ order.order.totalPrice }}$</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>

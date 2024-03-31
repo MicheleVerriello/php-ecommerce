@@ -48,6 +48,7 @@ return new class extends Migration
 
         Schema::create('orderitems', function (Blueprint $table) {
             $table->id();
+            $table->integer('quantity');
             $table->unsignedBigInteger('fkidorder');
             $table->foreign('fkidorder')->references('id')->on('orders')->cascadeOnDelete();
             $table->unsignedBigInteger('fkiditem');

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {CategoryService} from "../../../services/categories/category.service";
 import {ItemService} from "../../../services/items/item.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -19,6 +19,7 @@ export class ItemDetailsComponent {
   comingSoonImage: string = 'comingsoonimage.jpeg';
   categories: Category[] = [];
   idItem: string = "";
+  @ViewChild('fileInputRef') fileInputRef!: ElementRef; //reference to the file input
 
   constructor(private categoryService: CategoryService,
               private itemService: ItemService,
@@ -43,13 +44,12 @@ export class ItemDetailsComponent {
     this.itemService.updateItem(this.item.id, this.item).subscribe(response => {
       this.showSuccess = true;
       this.isFormEnabled = false;
-
-      this.updatePhoto();
     });
   }
 
-  updatePhoto() {
+  updatePhoto(event: any) {
 
+    this.selectedFile = event.target.files[0];
     const formData = new FormData();
     formData.append('photo', this.selectedFile as File);
 
@@ -67,10 +67,6 @@ export class ItemDetailsComponent {
     })
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-  }
-
   getItemById(id: string | number) {
     //get the item from the database
     this.itemService.getItemById(id).subscribe(response => {
@@ -82,6 +78,11 @@ export class ItemDetailsComponent {
     this.itemService.deleteItemPhoto(this.item.id).subscribe(response => {
       this.item = response.item;
     });
+
+    // Reset the value of the file input
+    if (this.fileInputRef && this.fileInputRef.nativeElement) {
+      this.fileInputRef.nativeElement.value = '';
+    }
   }
 
   deleteItem(id: number) {

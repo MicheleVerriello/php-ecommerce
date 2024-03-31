@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./components/auth/login/login.component";
 import {SignUpComponent} from "./components/auth/sign-up/sign-up.component";
-import {HomeComponent} from "./components/user/home/home.component";
 import {ItemsComponent} from "./components/admin/items/items.component";
 import {NewItemComponent} from "./components/admin/new-item/new-item.component";
 import {AddCategoryComponent} from "./components/admin/add-category/add-category.component";
@@ -25,7 +24,6 @@ const routes: Routes = [
   {path: 'admin/items/:id', component: ItemDetailsComponent},
   {path: 'admin/categories/new', component: AddCategoryComponent},
   // user side
-  {path: 'user/home', component: HomeComponent},
   {path: 'user/offers', component: OffersComponent},
   {path: 'user/orders', component: OrdersComponent},
   {path: 'user/cart', component: CartComponent},

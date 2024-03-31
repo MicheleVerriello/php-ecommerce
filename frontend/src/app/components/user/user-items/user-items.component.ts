@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Item} from "../../../models/item";
 import {ItemService} from "../../../services/items/item.service";
 import {CategoryService} from "../../../services/categories/category.service";
@@ -13,7 +13,7 @@ import {Category} from "../../../models/category";
   templateUrl: './user-items.component.html',
   styleUrl: './user-items.component.scss'
 })
-export class UserItemsComponent {
+export class UserItemsComponent implements OnInit {
 
   items: Item[] = []; //initializing empty products array
   searchValue: string = ''; // empty search value

@@ -35,7 +35,7 @@ export class LoginComponent {
         if(response.user.isAdmin) { // go to admin panel
         this.router.navigate(['/admin/items']);
       } else { // go to user panel
-        this.router.navigate(['/user/home']);
+        this.router.navigate(['/user/items']);
       }
     },
     error => {
