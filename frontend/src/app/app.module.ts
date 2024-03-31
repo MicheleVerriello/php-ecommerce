@@ -24,6 +24,7 @@ import { CartComponent } from './components/user/cart/cart.component';
 import { OrdersComponent } from './components/user/orders/orders.component';
 import { OffersComponent } from './components/user/offers/offers.component';
 import { UserItemsComponent } from './components/user/user-items/user-items.component';
+import { ContactsComponent } from './components/user/contacts/contacts.component';
 
 // Add icons to the library (you can add more icons as needed)
 library.add(fas, faEye, faEyeSlash);
@@ -42,7 +43,8 @@ library.add(fas, faEye, faEyeSlash);
     CartComponent,
     OrdersComponent,
     OffersComponent,
-    UserItemsComponent
+    UserItemsComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,

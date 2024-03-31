@@ -11,6 +11,7 @@ import {OffersComponent} from "./components/user/offers/offers.component";
 import {OrdersComponent} from "./components/user/orders/orders.component";
 import {CartComponent} from "./components/user/cart/cart.component";
 import {UserItemsComponent} from "./components/user/user-items/user-items.component";
+import {ContactsComponent} from "./components/user/contacts/contacts.component";
 
 const routes: Routes = [
   // general side
@@ -27,7 +28,8 @@ const routes: Routes = [
   {path: 'user/offers', component: OffersComponent},
   {path: 'user/orders', component: OrdersComponent},
   {path: 'user/cart', component: CartComponent},
-  {path: 'user/items', component: UserItemsComponent}
+  {path: 'user/items', component: UserItemsComponent},
+  {path: 'user/contacts', component: ContactsComponent}
 ];
 
 @NgModule({
